@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 import SDWebImage
 
 class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewDataSource{
@@ -21,6 +22,9 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
     @IBOutlet weak var tableview: UITableView!
 
     let refreshController = UIRefreshControl()
+    
+    //Firestore
+    let db = Firestore.firestore()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.menuDateKeys.count
@@ -127,6 +131,66 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
             }
         }
     }
+    
+    
+    // Firestore
+    func fetchFirestore() {
+
+        PostController.shared.posts = [Post]()
+        PostController.shared.posst =  Post()
+        
+        guard let uid = User.shared.getUid() else {
+            fatalError("Uidを取得出来ません。")
+        }
+
+        let ref = self.getManuCollectionRef()
+        let refImage = self.getImageDocumentRef()
+
+        
+        ref.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let documents = querySnapshot?.documents {
+                    documents.forEach({ (document) in
+
+                        PostController.shared.posst = Post()
+                        let post = document.data()
+                        print("DocumentData: \(post)")
+                        print("Menu: \(post["menu"])")
+
+                        if let date = post["date"] as! String?, let weight = post["weight"] as! String?, let number = post["number"] as! String?, let menu = post["menu"]  as! String?,let key = post["key"] as! String?{
+                            
+                            PostController.shared.posst.date = date
+                            PostController.shared.posst.weight = weight
+                            PostController.shared.posst.number = number
+                            PostController.shared.posst.menu = menu
+                            PostController.shared.posst.key = key
+                        }
+                        PostController.shared.posts.append(PostController.shared.posst)
+                    })
+                        refImage.getDocuments { (querySnapshot, error) in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            } else {
+                                if let documents = querySnapshot?.documents {
+                                    documents.forEach({ (document) in
+                                        let post = document.data()
+                                        
+                                        if let date = post["date"] as! String?, let imageData = post["imageData"] as! String?{
+                                            self.imageKyes[date] = imageData
+                                            }
+                                        }
+                                    )}
+                                self.Calculation()
+                                self.tableview.reloadData()
+                            }
+                        }
+                }
+            }
+        }
+    
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -140,7 +204,8 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         if let dName = User.shared.firebaseAuth.currentUser?.displayName {
             self.displayName = dName
         }
-        fetchPost()
+//        fetchPost()
+        self.fetchFirestore()
         tableview.reloadData()
     }
 
@@ -161,6 +226,7 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         refreshController.attributedTitle = NSAttributedString(string: "引っ張って更新")
         refreshController.addTarget(self, action: #selector(reflesh), for: .valueChanged)
         tableview.addSubview(refreshController)
+        
     }
     
     @IBAction func LogoutButton(_ sender: Any) {
@@ -171,8 +237,27 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
     
     @objc func reflesh() {
         print("REFLE")
-        fetchPost()
+//        fetchPost()
+        self.fetchFirestore()
+        tableview.reloadData()
         refreshController.endRefreshing()
     }
 
+    // Firestore
+    private func getManuCollectionRef() -> CollectionReference {
+        guard let uid = User.shared.getUid() else {
+            fatalError ("Uidを取得出来ませんでした。")
+        }
+        return db.collection("PostData").document(uid).collection("Menu")
+    }
+    
+    // Firestore
+    private func getImageDocumentRef() -> CollectionReference {
+        guard let uid = User.shared.getUid() else {
+            fatalError ("Uidを取得出来ませんでした。")
+        }
+        return db.collection("ImageData").document(uid).collection("Image")
+    }
+
+    
 }

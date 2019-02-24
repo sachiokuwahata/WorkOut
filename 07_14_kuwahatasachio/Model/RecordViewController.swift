@@ -8,19 +8,26 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class RecordViewController: UIViewController {
     
     static let shared = RecordViewController()
     
+    // Firestore
+    let db = Firestore.firestore()
+    
     func dataSet(date: String,weight: String,number: String,menu: String,keys: String,userName:String){
 
-//        func dataSet(date: String,weight: String,number: String,menu: String,keys: String,userName:String, imageData:NSData){
-
+        // Firestore
+        guard let uid = User.shared.getUid() else {
+            fatalError("Uidを取得出来ません。")
+        }
+        let ref = self.getManuCollectionRef()
+        
         
         let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("postdata").child("\(userName)")
         
-
         let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
         
         if keys == "damyy" {
@@ -30,7 +37,10 @@ class RecordViewController: UIViewController {
 
             let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key]
             let postFeed = ["\(key)":feed]
-                    
+
+            // Firestore
+            let documentRef = ref.addDocument(data: feed)
+            
             rootref.updateChildValues(postFeed)
 
             self.dismiss(animated: true, completion: nil)
@@ -44,16 +54,19 @@ class RecordViewController: UIViewController {
             rootref.updateChildValues(postFeed)
             //SVProgressHUD.dismiss()
 
-            self.dismiss(animated: true, completion: nil)
-            
-//            let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key]
-//            let postFeed = ["\(key)":feed]
-//            rootref.updateChildValues(postFeed)
+            self.dismiss(animated: true, completion: nil)            
         }
         
     }
     
     func imageSet(date: String, userName:String, imageData:NSData){
+        
+        //Firestore
+        guard let uid = User.shared.getUid() else {
+            fatalError("Uidを取得出来ません。")
+        }
+        let ref = self.getImageCollectionRef()
+
 
         let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("imageData").child("\(userName)").child("\(date)")
         let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
@@ -67,6 +80,9 @@ class RecordViewController: UIViewController {
             imageRef.downloadURL(completion: { (url, error) in
                 let feed = ["date":date, "imageData": url?.absoluteString]
                 rootref.setValue(feed)
+                
+                // Firestore
+                ref.document("\(date)").setData(feed)
             })
         }
         uploadTask.resume()
@@ -74,6 +90,22 @@ class RecordViewController: UIViewController {
 
     }
     
+    // Firestore
+    private func getManuCollectionRef () -> CollectionReference {
+        guard let uid = User.shared.getUid() else {
+            fatalError ("Uidを取得出来ませんでした。")
+        }
+        return db.collection("PostData").document(uid).collection("Menu")
+    }
+
+    // Firestore
+    private func getImageCollectionRef () -> CollectionReference {
+        guard let uid = User.shared.getUid() else {
+            fatalError ("Uidを取得出来ませんでした。")
+        }
+        return db.collection("ImageData").document(uid).collection("Image")
+    }
+
     
     
     override func viewDidLoad() {

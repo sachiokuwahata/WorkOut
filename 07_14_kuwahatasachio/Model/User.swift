@@ -45,4 +45,8 @@ class User {
         }
     }
     
+    func getUid() -> String? {
+        return firebaseAuth.currentUser?.uid
+    }
+    
 }
