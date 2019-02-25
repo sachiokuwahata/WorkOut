@@ -45,16 +45,14 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         dateTextLabel.text = self.menuDateKeys[indexPath.row]
         nameTextLabel.text = self.displayName
         
-        // URLへ変換
-        let imageurl = URL(string: self.imageKyes[self.menuDateKeys[indexPath.row]] as! String)
-        imageView.sd_setImage(with: imageurl, completed: nil)
-        imageView.layer.cornerRadius = 8.0
-        imageView.clipsToBounds = true
-
-        var imageData:NSData = NSData()
-        if let image = imageView.image {
-                    imageData = image.jpegData(compressionQuality: 0.01)! as NSData
-                }
+        
+        if let stringurl = self.imageKyes[self.menuDateKeys[indexPath.row]] {
+            let imageurl = URL(string:stringurl)
+            imageView.sd_setImage(with: imageurl, completed: nil)
+            imageView.layer.cornerRadius = 8.0
+            imageView.clipsToBounds = true
+        }
+        
         return cell
     }
     
@@ -210,7 +208,7 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
     func Calculation() {
         let DicMenu = Dictionary(grouping: PostController.shared.posts, by: { $0.date })
         self.menuDateKeys = [String](DicMenu.keys)
-        if menuDateKeys == nil { return }
+        if menuDateKeys == [] { return }
         print("MenuDate: \(self.menuDateKeys)")
     }
     

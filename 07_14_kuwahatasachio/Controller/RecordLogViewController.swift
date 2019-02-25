@@ -14,6 +14,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     var posst = Post()
     var data:NSData = NSData()
     var Today = String()
+    var TodayYMD = [String]()
     
     var userName = String()
     var image = UIImage()
@@ -38,12 +39,18 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             let weight = post.weight
             let date = post.date
             
-            RecordViewController.shared.dataSet(date: date,weight: weight,number: number,menu: menu,keys: keys,userName:userName)
+            let year = TodayYMD[0]
+            let month = TodayYMD[1]
+            let day = TodayYMD[2]
+            
+            RecordViewController.shared.dataSet(date: date,weight: weight,number: number,menu: menu,keys: keys,userName:userName,year:year,month:month,day:day)
         }
         
         RecordViewController.shared.imageSet(date: self.Today, userName:self.userName, imageData:data)        
-        self.navigationController?.popViewController(animated: true)
-        self.tabBarController!.selectedIndex = 2
+        //self.navigationController?.popViewController(animated: true)
+        //self.tabBarController!.selectedIndex = 1        
+        self.navigationController?.popToRootViewController(animated: true)
+
     }
     
     
@@ -64,8 +71,9 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         
         tableview.delegate = self
         tableview.dataSource = self
-
         self.data = self.image.jpegData(compressionQuality: 0.01)! as NSData
+        
+        self.TodayYMD = (self.Today.components(separatedBy: NSCharacterSet.decimalDigits.inverted))
         
     }
     
@@ -133,8 +141,16 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         return cell
     }
     
-    var selectNumber = String()
-    var selectWeight = String()
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        switch indexPath.row {
+        case 0:
+            return nil
+        case 1:
+            return nil
+        default:
+            return indexPath
+        }
+    }
     
     @objc func logPutButton(_ sender: Any) {
         let inputRecordvol2 = storyboard!.instantiateViewController(withIdentifier: "inputRecordvol2")

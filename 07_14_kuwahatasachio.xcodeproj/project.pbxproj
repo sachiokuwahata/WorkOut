@@ -165,9 +165,9 @@
 				1C1FB04921F8471A00F92866 /* InputRecordvol2ViewController.swift */,
 				1CB33F2C221C546B0052FD71 /* RecordDateViewController.swift */,
 				1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */,
+				1C01A8002223EEA7008BF01A /* RecordLogViewController.swift */,
 				1C6B4DAB21F97BF300AB4FEA /* TotalingViewController.swift */,
 				1C409CC321F5ACFD0029CBD0 /* EditViewController.swift */,
-				1C01A8002223EEA7008BF01A /* RecordLogViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

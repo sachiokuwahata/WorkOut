@@ -17,7 +17,7 @@ class RecordViewController: UIViewController {
     // Firestore
     let db = Firestore.firestore()
     
-    func dataSet(date: String,weight: String,number: String,menu: String,keys: String,userName:String){
+    func dataSet(date: String,weight: String,number: String,menu: String,keys: String,userName:String,year:String,month:String,day:String){
 
         // Firestore
         guard let uid = User.shared.getUid() else {
@@ -39,7 +39,7 @@ class RecordViewController: UIViewController {
             
             //Firestore
             let key = ref.document().documentID
-            let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key]
+            let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key, "year": year, "month": month, "day": day]
             ref.addDocument(data: feed)
             
             self.dismiss(animated: true, completion: nil)

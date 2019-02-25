@@ -42,19 +42,19 @@ class EditViewController: UIViewController {
     }
     
     
-    @IBAction func editButton(_ sender: Any) {
-
-        let menu = menuTextField.text
-        let number = numberTextField.text
-        let weight = weightTextField.text
-        let date = dateTextField.text
-        let userName = self.userName
-        let keys = self.key
-        
-        RecordViewController.shared.dataSet(date: date!,weight: weight!,number: number!,menu: menu!,keys: keys,userName:userName)
-
-        self.navigationController?.popViewController(animated: true)
-    }
+//    @IBAction func editButton(_ sender: Any) {
+//
+//        let menu = menuTextField.text
+//        let number = numberTextField.text
+//        let weight = weightTextField.text
+//        let date = dateTextField.text
+//        let userName = self.userName
+//        let keys = self.key
+//        
+//        RecordViewController.shared.dataSet(date: date!,weight: weight!,number: number!,menu: menu!,keys: keys,userName:userName,year:year,month:month,day:day)
+//
+//        self.navigationController?.popViewController(animated: true)
+//    }
 
     @IBAction func deleteButton(_ sender: Any) {
 

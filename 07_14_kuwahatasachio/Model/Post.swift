@@ -15,5 +15,10 @@ class Post: NSObject {
     var number:String = String()
     var menu:String = String()
     var key:String = String()
+    
+    var year:String = String()
+    var month:String = String()
+    var day:String = String()
+
 
 }
