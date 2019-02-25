@@ -143,7 +143,7 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
             fatalError("Uidを取得出来ません。")
         }
 
-        let ref = self.getManuCollectionRef()
+        let ref = self.getMenuCollectionRef()
         let refImage = self.getImageDocumentRef()
 
         
@@ -204,7 +204,6 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         if let dName = User.shared.firebaseAuth.currentUser?.displayName {
             self.displayName = dName
         }
-//        fetchPost()
         self.fetchFirestore()
         tableview.reloadData()
     }
@@ -236,15 +235,13 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
     }
     
     @objc func reflesh() {
-        print("REFLE")
-//        fetchPost()
         self.fetchFirestore()
         tableview.reloadData()
         refreshController.endRefreshing()
     }
 
     // Firestore
-    private func getManuCollectionRef() -> CollectionReference {
+    private func getMenuCollectionRef() -> CollectionReference {
         guard let uid = User.shared.getUid() else {
             fatalError ("Uidを取得出来ませんでした。")
         }

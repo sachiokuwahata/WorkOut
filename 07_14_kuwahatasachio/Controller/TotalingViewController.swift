@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class TotalingViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
     
@@ -16,6 +17,9 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
     var totals = [Toatal]()
     var totaln = Toatal()
 
+    //Firestore
+    let db = Firestore.firestore()
+    
     @IBOutlet weak var tableview: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,6 +72,50 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
         
     }
     
+    // Firestore
+    func fetchFirestore() {
+        
+        PostController.shared.posts = [Post]()
+        PostController.shared.posst =  Post()
+        
+        guard let uid = User.shared.getUid() else {
+            fatalError("Uidを取得出来ません。")
+        }
+        
+        let ref = self.getMenuCollectionRef()
+        let refImage = self.getImageDocumentRef()
+        
+        
+        ref.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let documents = querySnapshot?.documents {
+                    documents.forEach({ (document) in
+                        
+                        PostController.shared.posst = Post()
+                        let post = document.data()
+                        print("DocumentData: \(post)")
+                        print("Menu: \(post["menu"])")
+                        
+                        if let date = post["date"] as! String?, let weight = post["weight"] as! String?, let number = post["number"] as! String?, let menu = post["menu"]  as! String?,let key = post["key"] as! String?{
+                            
+                            PostController.shared.posst.date = date
+                            PostController.shared.posst.weight = weight
+                            PostController.shared.posst.number = number
+                            PostController.shared.posst.menu = menu
+                            PostController.shared.posst.key = key
+                        }
+                        PostController.shared.posts.append(PostController.shared.posst)
+                    })
+                    self.prepareData()
+                    self.tableview.reloadData()
+                }
+            }
+        }
+    }
+
+    
     func fetchPost() {
         
         PostController.shared.posts = [Post]()
@@ -96,8 +144,8 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
                 }
                 PostController.shared.posts.append(PostController.shared.posst)
             }
-     self.prepareData()
-     self.tableview.reloadData()
+         self.prepareData()
+         self.tableview.reloadData()
         }
         
     }
@@ -105,7 +153,8 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.fetchPost()
+//        self.fetchPost()
+        self.fetchFirestore()
     }
 
     
@@ -121,6 +170,21 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
         tableview.dataSource = self
     }
     
+    // Firestore
+    private func getMenuCollectionRef() -> CollectionReference {
+        guard let uid = User.shared.getUid() else {
+            fatalError ("Uidを取得出来ませんでした。")
+        }
+        return db.collection("PostData").document(uid).collection("Menu")
+    }
+
+    // Firestore
+    private func getImageDocumentRef() -> CollectionReference {
+        guard let uid = User.shared.getUid() else {
+            fatalError ("Uidを取得出来ませんでした。")
+        }
+        return db.collection("ImageData").document(uid).collection("Image")
+    }
 
 
 }

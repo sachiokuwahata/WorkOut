@@ -166,26 +166,26 @@ class RecordTrainingViewController: UIViewController ,UITableViewDelegate ,UITab
 
  private func validate() -> Bool {
     
-    guard self.posst.weight != "0", self.posst.weight != "" else {
-            let title:String = "重さを入力して下さい。"
+        guard self.posst.weight != "0", self.posst.weight != "" else {
+                let title:String = "重さを入力して下さい。"
+                let message:String = ""
+                displayAlert(title: title, message: message)
+            return false
+        }
+
+        guard self.posst.number != "0", self.posst.number != "" else {
+            let title:String = "数字を入力して下さい。"
             let message:String = ""
             displayAlert(title: title, message: message)
-        return false
-    }
+            return false
+        }
 
-    guard self.posst.number != "0", self.posst.number != "" else {
-        let title:String = "数字を入力して下さい。"
-        let message:String = ""
-        displayAlert(title: title, message: message)
-        return false
-    }
-
-    guard self.posst.menu != "---------", self.posst.number != "" else {
-        let title:String = "メニューを入力して下さい。"
-        let message:String = ""
-        displayAlert(title: title, message: message)
-        return false
-    }
+        guard self.posst.menu != "---------", self.posst.number != "" else {
+            let title:String = "メニューを入力して下さい。"
+            let message:String = ""
+            displayAlert(title: title, message: message)
+            return false
+        }
     
     return true
     }
