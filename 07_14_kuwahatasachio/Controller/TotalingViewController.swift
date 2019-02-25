@@ -95,8 +95,6 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
                         
                         PostController.shared.posst = Post()
                         let post = document.data()
-                        print("DocumentData: \(post)")
-                        print("Menu: \(post["menu"])")
                         
                         if let date = post["date"] as! String?, let weight = post["weight"] as! String?, let number = post["number"] as! String?, let menu = post["menu"]  as! String?,let key = post["key"] as! String?{
                             

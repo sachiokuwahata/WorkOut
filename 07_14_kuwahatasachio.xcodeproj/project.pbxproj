@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C1FB04821F8185B00F92866 /* InputRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FB04721F8185B00F92866 /* InputRecordViewController.swift */; };
+		1C01A8012223EEA7008BF01A /* RecordLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01A8002223EEA7008BF01A /* RecordLogViewController.swift */; };
 		1C1FB04A21F8471A00F92866 /* InputRecordvol2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FB04921F8471A00F92866 /* InputRecordvol2ViewController.swift */; };
 		1C1FB04D21F861A700F92866 /* InputMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FB04C21F861A700F92866 /* InputMenuViewController.swift */; };
 		1C2093D321FB0F41007D1B15 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2093D221FB0F41007D1B15 /* TabBarController.swift */; };
@@ -39,7 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1C1FB04721F8185B00F92866 /* InputRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputRecordViewController.swift; sourceTree = "<group>"; };
+		1C01A8002223EEA7008BF01A /* RecordLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLogViewController.swift; sourceTree = "<group>"; };
 		1C1FB04921F8471A00F92866 /* InputRecordvol2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputRecordvol2ViewController.swift; sourceTree = "<group>"; };
 		1C1FB04C21F861A700F92866 /* InputMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMenuViewController.swift; sourceTree = "<group>"; };
 		1C2093D221FB0F41007D1B15 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				1C8B6F3621F59591003CA72B /* RecordMenuViewController.swift */,
-				1C1FB04721F8185B00F92866 /* InputRecordViewController.swift */,
+				1C8EB051221EFC8100DEC7CB /* RecordTrainingViewController.swift */,
 				1C7CD10921F7206A00B28AF2 /* InputViewController.swift */,
 			);
 			path = old;
@@ -165,9 +165,9 @@
 				1C1FB04921F8471A00F92866 /* InputRecordvol2ViewController.swift */,
 				1CB33F2C221C546B0052FD71 /* RecordDateViewController.swift */,
 				1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */,
-				1C8EB051221EFC8100DEC7CB /* RecordTrainingViewController.swift */,
 				1C6B4DAB21F97BF300AB4FEA /* TotalingViewController.swift */,
 				1C409CC321F5ACFD0029CBD0 /* EditViewController.swift */,
+				1C01A8002223EEA7008BF01A /* RecordLogViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -378,8 +378,8 @@
 				1C409CC221F59AFD0029CBD0 /* RecordViewController.swift in Sources */,
 				1C8B6F0F21F5756D003CA72B /* AppDelegate.swift in Sources */,
 				1C8B6F3721F59591003CA72B /* RecordMenuViewController.swift in Sources */,
+				1C01A8012223EEA7008BF01A /* RecordLogViewController.swift in Sources */,
 				1C8B6F3521F5957D003CA72B /* RecordPhotoViewController.swift in Sources */,
-				1C1FB04821F8185B00F92866 /* InputRecordViewController.swift in Sources */,
 				1C6B4DAE21F9B77000AB4FEA /* Toatal.swift in Sources */,
 				1C9702A3221E8974003F4F1E /* ExtensionViewController.swift in Sources */,
 				1C9702A0221E8426003F4F1E /* PostController.swift in Sources */,

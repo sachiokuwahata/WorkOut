@@ -75,7 +75,7 @@ class RecordViewController: UIViewController {
         let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
         let imageRef = storage.child("\(userName)").child("\(key).jpg")
         
-        
+        print("Image: \(imageData)")
         let uploadTask = imageRef.putData(imageData as Data, metadata: nil) { (metadata, error) in
             if error != nil {
                 return
