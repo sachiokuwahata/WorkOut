@@ -32,16 +32,20 @@ class RecordViewController: UIViewController {
         
         if keys == "damyy" {
 
-            let key = rootref.childByAutoId().key
+            
+//            let key = rootref.childByAutoId().key
 
+            //Firestore
+            let key = ref.document().documentID
+            print("keyyyy: \(key)")
 
             let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key]
-            let postFeed = ["\(key)":feed]
+//            let postFeed = ["\(key)":feed]
 
             // Firestore
             let documentRef = ref.addDocument(data: feed)
             
-            rootref.updateChildValues(postFeed)
+//            rootref.updateChildValues(postFeed)
 
             self.dismiss(animated: true, completion: nil)
             
@@ -51,7 +55,7 @@ class RecordViewController: UIViewController {
             let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key]
             let postFeed = ["\(key)":feed]
                     
-            rootref.updateChildValues(postFeed)
+//            rootref.updateChildValues(postFeed)
             //SVProgressHUD.dismiss()
 
             self.dismiss(animated: true, completion: nil)            
@@ -66,11 +70,13 @@ class RecordViewController: UIViewController {
             fatalError("Uidを取得出来ません。")
         }
         let ref = self.getImageCollectionRef()
+        let key = ref.document().documentID
 
-
-        let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("imageData").child("\(userName)").child("\(date)")
+        print("keyyyyyy: \(key)")
+//        let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("imageData").child("\(userName)").child("\(date)")
         let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
-        let key = rootref.childByAutoId().key
+//        let key = rootref.childByAutoId().key
+        
         let imageRef = storage.child("\(userName)").child("\(key).jpg")
         
         let uploadTask = imageRef.putData(imageData as Data, metadata: nil) { (metadata, error) in
@@ -79,7 +85,7 @@ class RecordViewController: UIViewController {
             }
             imageRef.downloadURL(completion: { (url, error) in
                 let feed = ["date":date, "imageData": url?.absoluteString]
-                rootref.setValue(feed)
+//                rootref.setValue(feed)
                 
                 // Firestore
                 ref.document("\(date)").setData(feed)

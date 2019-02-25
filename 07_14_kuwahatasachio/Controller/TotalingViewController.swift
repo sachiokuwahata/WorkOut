@@ -36,7 +36,7 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
     
     private func prepareData() {
         let Dic = Dictionary(grouping: PostController.shared.posts, by: { $0.menu })
-        print(Dic)
+//        print(Dic)
         let menukeys = [String](Dic.keys)
         if menukeys == nil { return }
         
