@@ -47,7 +47,7 @@ class RecordTrainingViewController: UIViewController ,UITableViewDelegate ,UITab
     @IBAction func saveButton(_ sender: Any) {
         
         let userName = self.userName
-        let keys = "damyy"
+//        let keys = "damyy"
         
         for post in posts {
             
@@ -56,7 +56,9 @@ class RecordTrainingViewController: UIViewController ,UITableViewDelegate ,UITab
             let weight = post.weight
             let date = post.date
             
-            RecordViewController.shared.dataSet(date: date,weight: weight,number: number,menu: menu,keys: keys,userName:userName)
+//            RecordViewController.shared.dataSet(date: date,weight: weight,number: number,menu: menu,keys: keys,userName:userName)
+            RecordViewController.shared.dataSet(date: date,weight: weight,number: number,menu: menu, userName:userName)
+
         }
         
         RecordViewController.shared.imageSet(date: self.Today, userName:self.userName, imageData:data)
@@ -124,6 +126,7 @@ class RecordTrainingViewController: UIViewController ,UITableViewDelegate ,UITab
         
         if let image = pickedImageView.image {
             self.data = image.jpegData(compressionQuality: 0.01)! as NSData
+//            print("dataimageeeee: \(self.data)")
         }
         
     }

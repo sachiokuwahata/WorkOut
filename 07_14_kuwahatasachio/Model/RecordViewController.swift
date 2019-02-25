@@ -17,7 +17,7 @@ class RecordViewController: UIViewController {
     // Firestore
     let db = Firestore.firestore()
     
-    func dataSet(date: String,weight: String,number: String,menu: String,keys: String,userName:String){
+    func dataSet(date: String,weight: String,number: String,menu: String,userName:String){
 
         // Firestore
         guard let uid = User.shared.getUid() else {
@@ -26,36 +26,32 @@ class RecordViewController: UIViewController {
         let ref = self.getManuCollectionRef()
         
         
-        let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("postdata").child("\(userName)")
+//        let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("postdata").child("\(userName)")
         
-        let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
+//        let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
         
-        if keys == "damyy" {
-
-            let key = rootref.childByAutoId().key
-
-
-            let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key]
-            let postFeed = ["\(key)":feed]
+//        if keys == "damyy" {
+//
+//            let key = rootref.childByAutoId().key
+            let feed = ["date":date, "weight":weight, "number":number ,"menu":menu]
+//            let postFeed = ["\(key)":feed]
+//            rootref.updateChildValues(postFeed)
 
             // Firestore
             let documentRef = ref.addDocument(data: feed)
-            
-            rootref.updateChildValues(postFeed)
-
             self.dismiss(animated: true, completion: nil)
             
-        } else {
-            let key = keys as? String
-            
-            let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key]
-            let postFeed = ["\(key)":feed]
-                    
-            rootref.updateChildValues(postFeed)
-            //SVProgressHUD.dismiss()
-
-            self.dismiss(animated: true, completion: nil)            
-        }
+//        } else {
+//            let key = keys as? String
+//
+//            let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key]
+//            let postFeed = ["\(key)":feed]
+//
+//            rootref.updateChildValues(postFeed)
+//            //SVProgressHUD.dismiss()
+//
+//            self.dismiss(animated: true, completion: nil)
+//        }
         
     }
     
@@ -68,18 +64,29 @@ class RecordViewController: UIViewController {
         let ref = self.getImageCollectionRef()
 
 
-        let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("imageData").child("\(userName)").child("\(date)")
+//        let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("imageData").child("\(userName)").child("\(date)")
+
         let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
-        let key = rootref.childByAutoId().key
+//        let key = rootref.childByAutoId().key
+
+        let key = ref.document().documentID
+        print("key: \(key)")
         let imageRef = storage.child("\(userName)").child("\(key).jpg")
         
+        print("dataimageeeee: \(imageData)")
         let uploadTask = imageRef.putData(imageData as Data, metadata: nil) { (metadata, error) in
             if error != nil {
                 return
             }
+            
             imageRef.downloadURL(completion: { (url, error) in
+                if error != nil {
+                    print("Errorrrrr: \(error)")
+                    return
+                }
+                print("url: \(url)")
                 let feed = ["date":date, "imageData": url?.absoluteString]
-                rootref.setValue(feed)
+//                rootref.setValue(feed)
                 
                 // Firestore
                 ref.document("\(date)").setData(feed)

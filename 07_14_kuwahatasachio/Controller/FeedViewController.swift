@@ -159,13 +159,13 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
                         print("DocumentData: \(post)")
                         print("Menu: \(post["menu"])")
 
-                        if let date = post["date"] as! String?, let weight = post["weight"] as! String?, let number = post["number"] as! String?, let menu = post["menu"]  as! String?,let key = post["key"] as! String?{
+                        if let date = post["date"] as! String?, let weight = post["weight"] as! String?, let number = post["number"] as! String?, let menu = post["menu"]  as! String?{
                             
                             PostController.shared.posst.date = date
                             PostController.shared.posst.weight = weight
                             PostController.shared.posst.number = number
                             PostController.shared.posst.menu = menu
-                            PostController.shared.posst.key = key
+//                            PostController.shared.posst.key = key
                         }
                         PostController.shared.posts.append(PostController.shared.posst)
                     })
