@@ -14,6 +14,8 @@ class PostController: NSObject {
 
     var selectedPost = [Post]()
 
+    var mmPost = [Post]()
+    
     var posts = [Post]()
     var posst = Post()
     

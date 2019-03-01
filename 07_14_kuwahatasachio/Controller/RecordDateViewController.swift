@@ -29,14 +29,6 @@ class RecordDateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        
-        
-        
-        
-        
-        
-        
     }
     
 }

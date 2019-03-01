@@ -11,16 +11,19 @@ import Firebase
 import FirebaseFirestore
 import SDWebImage
 
-class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewDataSource{
+class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewDataSource ,UICollectionViewDataSource ,UICollectionViewDelegate{
     
     var displayName = String()
     var userName = String()
     
     var menuDateKeys = [String]()
     var imageKyes: [String: String] = [:]
-        
+    
+    let Mon = ["01","02","03","04","05","06","07","08","09","10","11","12"]
+    
     @IBOutlet weak var tableview: UITableView!
-
+    @IBOutlet weak var collectionview: UICollectionView!
+    
     let refreshController = UIRefreshControl()
     
     //Firestore
@@ -56,8 +59,6 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         return cell
     }
     
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dateData = self.menuDateKeys[indexPath.row]
         let postFilter = PostController.shared.posts.filter({$0.date == dateData})
@@ -69,6 +70,24 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         self.navigationController?.pushViewController(didSelectMenuVc, animated: true)
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.Mon.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionview.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        
+        let Label = cell.viewWithTag(1) as! UILabel
+        let mm = Mon[indexPath.row]
+        Label.text = "\(mm)月"
+        
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Month.shared.mm = Mon[indexPath.row]
+        self.fetchFirestore()
+    }
     
     @objc func edit(_ sender:TableButton){
         print(sender.indexpath)
@@ -155,13 +174,14 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
                         PostController.shared.posst = Post()
                         let post = document.data()
 
-                        if let date = post["date"] as! String?, let weight = post["weight"] as! String?, let number = post["number"] as! String?, let menu = post["menu"]  as! String?,let key = post["key"] as! String?{
+                        if let date = post["date"] as! String?, let weight = post["weight"] as! String?, let number = post["number"] as! String?, let menu = post["menu"]  as! String?,let key = post["key"] as! String?,let month = post["month"] as! String?{
                             
                             PostController.shared.posst.date = date
                             PostController.shared.posst.weight = weight
                             PostController.shared.posst.number = number
                             PostController.shared.posst.menu = menu
                             PostController.shared.posst.key = key
+                            PostController.shared.posst.month = month
                         }
                         PostController.shared.posts.append(PostController.shared.posst)
                     })
@@ -191,6 +211,8 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        Month.shared.mm = "02"
+        
         // Facebook処理
         if let user = User.shared.firebaseAuth.currentUser?.uid {
             self.userName = user
@@ -206,7 +228,13 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
 
     
     func Calculation() {
-        let DicMenu = Dictionary(grouping: PostController.shared.posts, by: { $0.date })
+        
+        PostController.shared.mmPost = PostController.shared.posts.filter({$0.month == Month.shared.mm})
+        print("mmposts: \(PostController.shared.mmPost)")
+        
+//        let DicMenu = Dictionary(grouping: PostController.shared.posts, by: { $0.date })
+        let DicMenu = Dictionary(grouping: PostController.shared.mmPost, by: { $0.date })
+
         self.menuDateKeys = [String](DicMenu.keys)
         if menuDateKeys == [] { return }
         print("MenuDate: \(self.menuDateKeys)")
@@ -218,6 +246,9 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         
         tableview.delegate = self
         tableview.dataSource = self
+        collectionview.delegate = self
+        collectionview.dataSource = self
+        
         refreshController.attributedTitle = NSAttributedString(string: "引っ張って更新")
         refreshController.addTarget(self, action: #selector(reflesh), for: .valueChanged)
         tableview.addSubview(refreshController)

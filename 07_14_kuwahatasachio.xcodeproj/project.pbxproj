@@ -18,6 +18,7 @@
 		1C601D5C22131BFE00454C1E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C601D5B22131BFE00454C1E /* User.swift */; };
 		1C6B4DAC21F97BF300AB4FEA /* TotalingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B4DAB21F97BF300AB4FEA /* TotalingViewController.swift */; };
 		1C6B4DAE21F9B77000AB4FEA /* Toatal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B4DAD21F9B77000AB4FEA /* Toatal.swift */; };
+		1C78AB1A222980BA00B83780 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C78AB19222980BA00B83780 /* Month.swift */; };
 		1C7CD10A21F7206A00B28AF2 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7CD10921F7206A00B28AF2 /* InputViewController.swift */; };
 		1C8B6F0F21F5756D003CA72B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F0E21F5756D003CA72B /* AppDelegate.swift */; };
 		1C8B6F1121F5756D003CA72B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F1021F5756D003CA72B /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 		1C601D5B22131BFE00454C1E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1C6B4DAB21F97BF300AB4FEA /* TotalingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalingViewController.swift; sourceTree = "<group>"; };
 		1C6B4DAD21F9B77000AB4FEA /* Toatal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toatal.swift; sourceTree = "<group>"; };
+		1C78AB19222980BA00B83780 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		1C7CD10921F7206A00B28AF2 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		1C8B6F0B21F5756D003CA72B /* 07_14_kuwahatasachio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 07_14_kuwahatasachio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C8B6F0E21F5756D003CA72B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				1C8B6F2821F5835C003CA72B /* Post.swift */,
+				1C78AB19222980BA00B83780 /* Month.swift */,
 				1C97029F221E8426003F4F1E /* PostController.swift */,
 				1C8B6F2E21F586A0003CA72B /* TableButton.swift */,
 				1C409CC121F59AFD0029CBD0 /* RecordViewController.swift */,
@@ -373,6 +376,7 @@
 				1C6B4DAC21F97BF300AB4FEA /* TotalingViewController.swift in Sources */,
 				1C8B6F2321F579E1003CA72B /* FeedViewController.swift in Sources */,
 				1C8B6F2F21F586A0003CA72B /* TableButton.swift in Sources */,
+				1C78AB1A222980BA00B83780 /* Month.swift in Sources */,
 				1C2093D321FB0F41007D1B15 /* TabBarController.swift in Sources */,
 				1C1FB04A21F8471A00F92866 /* InputRecordvol2ViewController.swift in Sources */,
 				1C409CC221F59AFD0029CBD0 /* RecordViewController.swift in Sources */,
