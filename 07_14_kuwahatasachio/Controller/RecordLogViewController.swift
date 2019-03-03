@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Photos
 
-class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableViewDataSource{
+class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableViewDataSource,UINavigationControllerDelegate ,UIImagePickerControllerDelegate{
     
     var posts = [Post]()
     var posst = Post()
@@ -18,12 +19,70 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     
     var userName = String()
     var image = UIImage()
+    var mainImage = UIImage()
+    var imageChanged:Bool = false
     
     var weightText = String()
     var numberText = String()
     var menuText = String()
     var dateText = String()
     
+    @IBOutlet weak var mainImageView: UIImageView!
+    
+    @IBAction func tapImageView(_ sender: Any) {
+        print("imageviewTAp")
+        let alert = UIAlertController(title: "", message: "選択してください", preferredStyle: UIAlertController.Style.actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "カメラ", style: UIAlertAction.Style.default, handler: {
+            (action: UIAlertAction!) in
+            print("カメラ")
+            self.presentPicker(souceType: .camera)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "アルバム", style: UIAlertAction.Style.default, handler: {
+            (action: UIAlertAction!) in
+            print("アルバム")
+            self.presentPicker(souceType: .photoLibrary)
+        }))
+        alert.addAction(UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: {
+            (action: UIAlertAction!) in
+            print("キャンセル")
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func presentPicker(souceType: UIImagePickerController.SourceType) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(souceType) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.sourceType = souceType
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+            
+        } else {
+            print ("The SouceType is not found.")
+        }
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("aaaaaaaaaa")
+        
+        if let pickedimage = info[.editedImage] as? UIImage {
+            mainImageView.contentMode = .scaleAspectFit
+            self.mainImage = pickedimage
+            mainImageView.image = self.mainImage
+            self.data = self.mainImage.jpegData(compressionQuality: 0.01)! as NSData
+            self.imageChanged = true
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var tableview: UITableView!
     
@@ -71,9 +130,18 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         
         tableview.delegate = self
         tableview.dataSource = self
-        self.data = self.image.jpegData(compressionQuality: 0.01)! as NSData
+//        self.data = self.image.jpegData(compressionQuality: 0.01)! as NSData
         
         self.TodayYMD = (self.Today.components(separatedBy: NSCharacterSet.decimalDigits.inverted))
+        
+//        PHPhotoLibrary.requestAuthorization { (status) in
+//            switch(status){
+//            case .authorized:break
+//            case .denied:break
+//            case .notDetermined:break
+//            case .restricted:break
+//            }
+//        }
         
     }
     
@@ -96,12 +164,13 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         if indexPath.row == 0 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath)
             
-            cell.imageView?.image = self.image            
+//            cell.imageView?.image = self.image            
             return cell
         } else if indexPath.row == 1 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "RecordCell", for: indexPath)
 
             let dateLabel = cell.viewWithTag(1) as! UILabel
+            let dateButton = cell.viewWithTag(8) as! UIButton
             let menuButton = cell.viewWithTag(2) as! UIButton
             let menuTextField = cell.viewWithTag(3) as! UITextField
             let logButton = cell.viewWithTag(4) as! UIButton
@@ -113,7 +182,9 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             menuButton.addTarget(self, action: #selector(menuPutButton), for: .touchUpInside)
             logButton.addTarget(self, action: #selector(logPutButton), for: .touchUpInside)
             addButton.addTarget(self, action: #selector(addDataButton), for: .touchUpInside)
+            dateButton.addTarget(self, action: #selector(logPutButton), for: .touchUpInside)
 
+            
             menuText = UserDefaults.standard.object(forKey: "selectMenu") as! String
             weightText = UserDefaults.standard.object(forKey: "selectWeight") as! String
             numberText = UserDefaults.standard.object(forKey: "selectNumber") as! String
@@ -185,6 +256,14 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
 
     
     private func validate() -> Bool {
+
+        guard self.imageChanged else {
+            let title:String = "画像を追加して下さい。"
+            let message:String = ""
+            displayAlert(title: title, message: message)
+            return false
+        }
+
         
         guard self.posst.weight != "0", self.posst.weight != "" else {
             let title:String = "重さを入力して下さい。"

@@ -19,7 +19,6 @@
 		1C6B4DAC21F97BF300AB4FEA /* TotalingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B4DAB21F97BF300AB4FEA /* TotalingViewController.swift */; };
 		1C6B4DAE21F9B77000AB4FEA /* Toatal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B4DAD21F9B77000AB4FEA /* Toatal.swift */; };
 		1C78AB1A222980BA00B83780 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C78AB19222980BA00B83780 /* Month.swift */; };
-		1C7CD10A21F7206A00B28AF2 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7CD10921F7206A00B28AF2 /* InputViewController.swift */; };
 		1C8B6F0F21F5756D003CA72B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F0E21F5756D003CA72B /* AppDelegate.swift */; };
 		1C8B6F1121F5756D003CA72B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F1021F5756D003CA72B /* ViewController.swift */; };
 		1C8B6F1421F5756D003CA72B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C8B6F1221F5756D003CA72B /* Main.storyboard */; };
@@ -30,8 +29,6 @@
 		1C8B6F2F21F586A0003CA72B /* TableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F2E21F586A0003CA72B /* TableButton.swift */; };
 		1C8B6F3121F58C29003CA72B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C8B6F3021F58C29003CA72B /* GoogleService-Info.plist */; };
 		1C8B6F3521F5957D003CA72B /* RecordPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */; };
-		1C8B6F3721F59591003CA72B /* RecordMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F3621F59591003CA72B /* RecordMenuViewController.swift */; };
-		1C8EB052221EFC8100DEC7CB /* RecordTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8EB051221EFC8100DEC7CB /* RecordTrainingViewController.swift */; };
 		1C97029E221E803C003F4F1E /* didSelectMenuVcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C97029D221E803B003F4F1E /* didSelectMenuVcViewController.swift */; };
 		1C9702A0221E8426003F4F1E /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C97029F221E8426003F4F1E /* PostController.swift */; };
 		1C9702A3221E8974003F4F1E /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9702A2221E8974003F4F1E /* ExtensionViewController.swift */; };
@@ -52,7 +49,6 @@
 		1C6B4DAB21F97BF300AB4FEA /* TotalingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalingViewController.swift; sourceTree = "<group>"; };
 		1C6B4DAD21F9B77000AB4FEA /* Toatal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toatal.swift; sourceTree = "<group>"; };
 		1C78AB19222980BA00B83780 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
-		1C7CD10921F7206A00B28AF2 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		1C8B6F0B21F5756D003CA72B /* 07_14_kuwahatasachio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 07_14_kuwahatasachio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C8B6F0E21F5756D003CA72B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C8B6F1021F5756D003CA72B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,8 +61,6 @@
 		1C8B6F2E21F586A0003CA72B /* TableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableButton.swift; sourceTree = "<group>"; };
 		1C8B6F3021F58C29003CA72B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPhotoViewController.swift; sourceTree = "<group>"; };
-		1C8B6F3621F59591003CA72B /* RecordMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMenuViewController.swift; sourceTree = "<group>"; };
-		1C8EB051221EFC8100DEC7CB /* RecordTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTrainingViewController.swift; sourceTree = "<group>"; };
 		1C97029D221E803B003F4F1E /* didSelectMenuVcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = didSelectMenuVcViewController.swift; sourceTree = "<group>"; };
 		1C97029F221E8426003F4F1E /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		1C9702A2221E8974003F4F1E /* ExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
@@ -91,9 +85,6 @@
 		1C1FB04B21F85EE900F92866 /* old */ = {
 			isa = PBXGroup;
 			children = (
-				1C8B6F3621F59591003CA72B /* RecordMenuViewController.swift */,
-				1C8EB051221EFC8100DEC7CB /* RecordTrainingViewController.swift */,
-				1C7CD10921F7206A00B28AF2 /* InputViewController.swift */,
 			);
 			path = old;
 			sourceTree = "<group>";
@@ -368,10 +359,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C7CD10A21F7206A00B28AF2 /* InputViewController.swift in Sources */,
 				1C8B6F1121F5756D003CA72B /* ViewController.swift in Sources */,
 				1C97029E221E803C003F4F1E /* didSelectMenuVcViewController.swift in Sources */,
-				1C8EB052221EFC8100DEC7CB /* RecordTrainingViewController.swift in Sources */,
 				1C1FB04D21F861A700F92866 /* InputMenuViewController.swift in Sources */,
 				1C6B4DAC21F97BF300AB4FEA /* TotalingViewController.swift in Sources */,
 				1C8B6F2321F579E1003CA72B /* FeedViewController.swift in Sources */,
@@ -381,7 +370,6 @@
 				1C1FB04A21F8471A00F92866 /* InputRecordvol2ViewController.swift in Sources */,
 				1C409CC221F59AFD0029CBD0 /* RecordViewController.swift in Sources */,
 				1C8B6F0F21F5756D003CA72B /* AppDelegate.swift in Sources */,
-				1C8B6F3721F59591003CA72B /* RecordMenuViewController.swift in Sources */,
 				1C01A8012223EEA7008BF01A /* RecordLogViewController.swift in Sources */,
 				1C8B6F3521F5957D003CA72B /* RecordPhotoViewController.swift in Sources */,
 				1C6B4DAE21F9B77000AB4FEA /* Toatal.swift in Sources */,
