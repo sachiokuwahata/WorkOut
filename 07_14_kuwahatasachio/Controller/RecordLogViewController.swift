@@ -182,8 +182,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             menuButton.addTarget(self, action: #selector(menuPutButton), for: .touchUpInside)
             logButton.addTarget(self, action: #selector(logPutButton), for: .touchUpInside)
             addButton.addTarget(self, action: #selector(addDataButton), for: .touchUpInside)
-            dateButton.addTarget(self, action: #selector(logPutButton), for: .touchUpInside)
-
+            dateButton.addTarget(self, action: #selector(dateLogButton), for: .touchUpInside)
             
             menuText = UserDefaults.standard.object(forKey: "selectMenu") as! String
             weightText = UserDefaults.standard.object(forKey: "selectWeight") as! String
@@ -221,6 +220,13 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             return indexPath
         }
     }
+
+    @objc func dateLogButton(_ sender: Any) {
+        print("datebutton")
+        let inputDateVC = storyboard!.instantiateViewController(withIdentifier: "inputDateVC")
+        self.present(inputDateVC,animated: true, completion: nil)
+    }
+
     
     @objc func logPutButton(_ sender: Any) {
         let inputRecordvol2 = storyboard!.instantiateViewController(withIdentifier: "inputRecordvol2")

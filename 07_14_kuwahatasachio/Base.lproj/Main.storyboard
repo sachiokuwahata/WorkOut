@@ -450,12 +450,11 @@
                     <navigationItem key="navigationItem" id="jrJ-tI-8D8"/>
                     <connections>
                         <outlet property="datepickerview" destination="3Cl-1m-vrv" id="BdX-8h-QWZ"/>
-                        <segue destination="aeM-Nc-9CB" kind="show" id="kdR-9S-9J9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y8s-I1-0IT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1661" y="1933"/>
+            <point key="canvasLocation" x="3544.9275362318845" y="1934.5108695652175"/>
         </scene>
         <!--Record Photo View Controller-->
         <scene sceneID="DeZ-MJ-D9c">
@@ -534,12 +533,11 @@
                     </view>
                     <connections>
                         <outlet property="todayDate" destination="LLg-2c-W8i" id="wwF-AY-xbI"/>
-                        <segue destination="ki4-i6-jYd" kind="show" id="WG4-iZ-VU0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAa-SN-45Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2493" y="1933"/>
+            <point key="canvasLocation" x="4281.159420289855" y="1932.8804347826087"/>
         </scene>
         <!--Title-->
         <scene sceneID="4kq-sB-dU5">
@@ -1051,7 +1049,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3373.913043478261" y="1934.5108695652175"/>
+            <point key="canvasLocation" x="1661" y="1933"/>
         </scene>
         <!--Input Recordvol2 View Controller-->
         <scene sceneID="aoV-lZ-qny">
@@ -1098,7 +1096,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfw-H2-9SV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4148" y="1933"/>
+            <point key="canvasLocation" x="5055.072463768116" y="1932.8804347826087"/>
         </scene>
         <!--Input Menu View Controller-->
         <scene sceneID="vbE-Xq-6vB">
@@ -1152,7 +1150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYY-IC-qGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4961" y="1933"/>
+            <point key="canvasLocation" x="5868.115942028986" y="1932.8804347826087"/>
         </scene>
         <!--Totaling View Controller-->
         <scene sceneID="Lbj-Za-0uP">
@@ -1244,14 +1242,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Y0s-ZG-7Ex" kind="relationship" relationship="viewControllers" id="z3c-fL-Hfx"/>
-                        <segue destination="6gw-WK-t9y" kind="relationship" relationship="viewControllers" id="M4M-7G-K3r"/>
-                        <segue destination="xXL-L1-7we" kind="relationship" relationship="viewControllers" id="EHl-qh-R5i"/>
+                        <segue destination="Y0s-ZG-7Ex" kind="relationship" relationship="viewControllers" id="NCt-Z5-CwH"/>
+                        <segue destination="5LD-k8-jGa" kind="relationship" relationship="viewControllers" id="Zpw-EI-wcp"/>
+                        <segue destination="xXL-L1-7we" kind="relationship" relationship="viewControllers" id="Q8x-NY-wTm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3X4-aL-quM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-284" y="1934"/>
+            <point key="canvasLocation" x="-409" y="1933"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dwv-7F-NLP">
@@ -1289,7 +1287,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GRn-yl-BvN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724" y="1935"/>
+            <point key="canvasLocation" x="2836.2318840579715" y="1932.8804347826087"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tiy-2k-Qif">
@@ -1346,10 +1344,10 @@
             </objects>
             <point key="canvasLocation" x="2701" y="470"/>
         </scene>
-        <!--Record Date View Controller-->
+        <!--Input Date View Controller-->
         <scene sceneID="jy1-eh-7Mk">
             <objects>
-                <viewController id="KpD-Dx-t8H" customClass="RecordDateViewController" customModule="_7_14_kuwahatasachio" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="inputDateVC" id="KpD-Dx-t8H" customClass="InputDateViewController" customModule="_7_14_kuwahatasachio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j98-Uj-Dvr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1374,7 +1372,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="dateDecideButton:" destination="KpD-Dx-t8H" eventType="touchUpInside" id="w2T-oi-kfZ"/>
+                                    <action selector="didDateButton:" destination="KpD-Dx-t8H" eventType="touchUpInside" id="hwL-8u-Dek"/>
                                     <action selector="ok:" destination="nNN-6A-9Hw" eventType="touchUpInside" id="OUJ-PU-UU2"/>
                                 </connections>
                             </button>
@@ -1394,12 +1392,31 @@
                     </view>
                     <navigationItem key="navigationItem" id="FTS-bC-7SB"/>
                     <connections>
-                        <outlet property="datepickerview" destination="fAP-Ox-pDp" id="Dpo-2n-D5g"/>
+                        <outlet property="datePickerView" destination="fAP-Ox-pDp" id="tS9-ih-8Lh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lW-AW-fLC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5774" y="1933"/>
+            <point key="canvasLocation" x="6681.1594202898559" y="1932.8804347826087"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="HQh-rd-Xyh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5LD-k8-jGa" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Ij7-rA-dYw"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Kcy-ka-n3Z">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ki4-i6-jYd" kind="relationship" relationship="rootViewController" id="SYG-aQ-OpP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="An7-uL-mF8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="723" y="1933"/>
         </scene>
     </scenes>
     <resources>
