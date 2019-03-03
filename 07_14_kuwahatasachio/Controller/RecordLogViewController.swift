@@ -68,7 +68,6 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print("aaaaaaaaaa")
         
         if let pickedimage = info[.editedImage] as? UIImage {
             mainImageView.contentMode = .scaleAspectFit
@@ -90,13 +89,15 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         
         let userName = self.userName
         let keys = "damyy"
+        self.Today = UserDefaults.standard.object(forKey: "selectDate") as! String
+        self.TodayYMD = (self.Today.components(separatedBy: NSCharacterSet.decimalDigits.inverted))
         
         for post in posts {
             
+            let date = post.date
             let menu = post.menu
             let number = post.number
             let weight = post.weight
-            let date = post.date
             
             let year = TodayYMD[0]
             let month = TodayYMD[1]
@@ -107,8 +108,10 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         
         RecordViewController.shared.imageSet(date: self.Today, userName:self.userName, imageData:data)        
         //self.navigationController?.popViewController(animated: true)
-        //self.tabBarController!.selectedIndex = 1        
-        self.navigationController?.popToRootViewController(animated: true)
+        self.tabBarController!.selectedIndex = 0
+        self.posts = [Post]()
+        
+//        self.navigationController?.popToRootViewController(animated: true)
 
     }
     
@@ -130,30 +133,28 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         
         tableview.delegate = self
         tableview.dataSource = self
-//        self.data = self.image.jpegData(compressionQuality: 0.01)! as NSData
         
-        self.TodayYMD = (self.Today.components(separatedBy: NSCharacterSet.decimalDigits.inverted))
-        
-//        PHPhotoLibrary.requestAuthorization { (status) in
-//            switch(status){
-//            case .authorized:break
-//            case .denied:break
-//            case .notDetermined:break
-//            case .restricted:break
-//            }
-//        }
+        PHPhotoLibrary.requestAuthorization { (status) in
+            switch(status){
+            case .authorized:break
+            case .denied:break
+            case .notDetermined:break
+            case .restricted:break
+            }
+        }
+        UserDefaults.standard.set("0", forKey: "selectWeight")
+        UserDefaults.standard.set("0", forKey: "selectNumber")
+        UserDefaults.standard.set("---------", forKey: "selectMenu")
+        UserDefaults.standard.set("yyyy年mm月dd日", forKey: "selectDate")
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count + 2
+        return posts.count + 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         if indexPath.row == 0 {
-            return 290
-        } else if indexPath.row == 1 {
             return 355
         }
         return 95
@@ -162,11 +163,6 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = tableview.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath)
-            
-//            cell.imageView?.image = self.image            
-            return cell
-        } else if indexPath.row == 1 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "RecordCell", for: indexPath)
 
             let dateLabel = cell.viewWithTag(1) as! UILabel
@@ -178,17 +174,17 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             let numberTextField = cell.viewWithTag(6) as! UITextField
             let addButton = cell.viewWithTag(7) as! UIButton
             
-            dateLabel.text = self.Today
             menuButton.addTarget(self, action: #selector(menuPutButton), for: .touchUpInside)
             logButton.addTarget(self, action: #selector(logPutButton), for: .touchUpInside)
             addButton.addTarget(self, action: #selector(addDataButton), for: .touchUpInside)
             dateButton.addTarget(self, action: #selector(dateLogButton), for: .touchUpInside)
             
+            dateText = UserDefaults.standard.object(forKey: "selectDate") as! String
             menuText = UserDefaults.standard.object(forKey: "selectMenu") as! String
             weightText = UserDefaults.standard.object(forKey: "selectWeight") as! String
             numberText = UserDefaults.standard.object(forKey: "selectNumber") as! String
-            dateText = UserDefaults.standard.object(forKey: "selectDate") as! String
             
+            dateLabel.text = dateText
             menuTextField.text = menuText
             weightTextField.text = weightText
             numberTextField.text = numberText
@@ -202,7 +198,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         let weightLabel = cell.viewWithTag(2) as! UITextField
         let numberLabel = cell.viewWithTag(3) as! UITextField
         
-        let row = indexPath.row - 2
+        let row = indexPath.row - 1
         menuLabel.text = self.posts[row].menu
         weightLabel.text = self.posts[row].weight
         numberLabel.text = self.posts[row].number
@@ -213,8 +209,6 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.row {
         case 0:
-            return nil
-        case 1:
             return nil
         default:
             return indexPath
@@ -241,7 +235,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     @objc func addDataButton(_ sender: Any) {
         self.posst = Post()
         
-        self.posst.date = self.Today
+        self.posst.date = UserDefaults.standard.object(forKey: "selectDate") as! String
         self.posst.weight = self.weightText
         self.posst.number = self.numberText
         self.posst.menu = self.menuText

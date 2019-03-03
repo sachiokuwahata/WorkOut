@@ -23,6 +23,7 @@ class InputDateViewController: UIViewController {
         
         let RecordLogVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordLogVC") as! RecordLogViewController
         RecordLogVC.Today = self.yymmdd
+        UserDefaults.standard.set(self.yymmdd, forKey: "selectDate")
 
         self.dismiss(animated: true, completion: nil)
     }
