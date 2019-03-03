@@ -11,15 +11,13 @@ import Firebase
 import FirebaseFirestore
 import SDWebImage
 
-class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewDataSource ,UICollectionViewDataSource ,UICollectionViewDelegate{
+class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewDataSource ,UICollectionViewDataSource ,UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
     var displayName = String()
     var userName = String()
     
     var menuDateKeys = [String]()
     var imageKyes: [String: String] = [:]
-    
-    let Mon = ["01","02","03","04","05","06","07","08","09","10","11","12"]
     
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var collectionview: UICollectionView!
@@ -70,28 +68,55 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         self.navigationController?.pushViewController(didSelectMenuVc, animated: true)
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.Mon.count
+        return self.menuDateKeys.count
     }
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionview.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
-        let Label = cell.viewWithTag(1) as! UILabel
-        let mm = Mon[indexPath.row]
-        Label.text = "\(mm)月"
+        let ImageView = cell.viewWithTag(1) as! UIImageView
+        let Label = cell.viewWithTag(2) as! UILabel
+
+        Label.text = self.menuDateKeys[indexPath.row]
         
+        if let stringurl = self.imageKyes[self.menuDateKeys[indexPath.row]] {
+            let imageurl = URL(string:stringurl)
+            ImageView.sd_setImage(with: imageurl, completed: nil)
+            ImageView.layer.cornerRadius = 8.0
+            ImageView.clipsToBounds = true
+        }
+
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Month.shared.mm = Mon[indexPath.row]
-        self.fetchFirestore()
+        let dateData = self.menuDateKeys[indexPath.row]
+        let postFilter = PostController.shared.posts.filter({$0.date == dateData})
+        
+        PostController.shared.selectedPost = postFilter
+        
+        print("SelectedPost: \(PostController.shared.selectedPost)")
+        let didSelectMenuVc = self.storyboard?.instantiateViewController(withIdentifier: "didSelectMenuVc") as! didSelectMenuVcViewController
+        self.navigationController?.pushViewController(didSelectMenuVc, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // 横方向のスペース調整
+        let horizontalSpace:CGFloat = 2
+        let cellSize:CGFloat = self.view.bounds.width/2 - horizontalSpace
+        let textLabelSpace:CGFloat = 6
+        let cellSizeHight:CGFloat = cellSize + textLabelSpace
+        // 正方形で返すためにwidth,heightを同じにする
+        return CGSize(width: cellSize, height: cellSizeHight)
+        
     }
     
     @objc func edit(_ sender:TableButton){
         print(sender.indexpath)
-        
         let editVC = self.storyboard?.instantiateViewController(withIdentifier: "editVC") as! EditViewController
 
         // editVCへ編集データの受け渡し
@@ -145,6 +170,7 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
                 }
                 self.Calculation()
                 self.tableview.reloadData()
+                self.collectionview.reloadData()
             }
         }
     }
@@ -200,6 +226,7 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
                                     )}
                                 self.Calculation()
                                 self.tableview.reloadData()
+                                self.collectionview.reloadData()
                             }
                         }
                 }
@@ -210,8 +237,6 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        Month.shared.mm = "02"
         
         // Facebook処理
         if let user = User.shared.firebaseAuth.currentUser?.uid {
@@ -224,20 +249,24 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         }
         self.fetchFirestore()
         tableview.reloadData()
+        collectionview.reloadData()
     }
 
     
     func Calculation() {
         
-        PostController.shared.mmPost = PostController.shared.posts.filter({$0.month == Month.shared.mm})
-        print("mmposts: \(PostController.shared.mmPost)")
-        
-//        let DicMenu = Dictionary(grouping: PostController.shared.posts, by: { $0.date })
-        let DicMenu = Dictionary(grouping: PostController.shared.mmPost, by: { $0.date })
+//        PostController.shared.mmPost = PostController.shared.posts.filter({$0.month == Month.shared.mm})
+//        let DicMenu = Dictionary(grouping: PostController.shared.mmPost, by: { $0.date })
+        let DicMenu = Dictionary(grouping: PostController.shared.posts, by: { $0.date })
 
         self.menuDateKeys = [String](DicMenu.keys)
         if menuDateKeys == [] { return }
-        print("MenuDate: \(self.menuDateKeys)")
+        print("BeforeMenuDate: \(self.menuDateKeys)")
+        
+        self.menuDateKeys.sort(by: {$0 > $1})
+        print("AfterMenuDate: \(self.menuDateKeys)")
+
+        
     }
     
     
@@ -251,6 +280,7 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         
         refreshController.attributedTitle = NSAttributedString(string: "引っ張って更新")
         refreshController.addTarget(self, action: #selector(reflesh), for: .valueChanged)
+        collectionview.addSubview(refreshController)
         tableview.addSubview(refreshController)
         
     }
@@ -264,6 +294,7 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
     @objc func reflesh() {
         self.fetchFirestore()
         tableview.reloadData()
+        collectionview.reloadData()
         refreshController.endRefreshing()
     }
 

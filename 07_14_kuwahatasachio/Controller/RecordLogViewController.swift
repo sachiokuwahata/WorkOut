@@ -96,8 +96,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         if indexPath.row == 0 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath)
             
-            cell.imageView?.image = self.image
-            
+            cell.imageView?.image = self.image            
             return cell
         } else if indexPath.row == 1 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "RecordCell", for: indexPath)
