@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 import SDWebImage
 
-class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewDataSource ,UICollectionViewDataSource ,UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
+class FeedViewController: UIViewController ,UICollectionViewDataSource ,UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
     var displayName = String()
     var userName = String()
@@ -19,55 +19,12 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
     var menuDateKeys = [String]()
     var imageKyes: [String: String] = [:]
     
-    @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var collectionview: UICollectionView!
     
     let refreshController = UIRefreshControl()
     
     //Firestore
     let db = Firestore.firestore()
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.menuDateKeys.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        let imageView = cell.viewWithTag(1) as! UIImageView
-        let dateTextLabel = cell.viewWithTag(5) as! UILabel
-        let nameTextLabel = cell.viewWithTag(6) as! UILabel
-
-        dateTextLabel.text = self.menuDateKeys[indexPath.row]
-        nameTextLabel.text = self.displayName
-        
-        
-        if let stringurl = self.imageKyes[self.menuDateKeys[indexPath.row]] {
-            let imageurl = URL(string:stringurl)
-            imageView.sd_setImage(with: imageurl, completed: nil)
-            imageView.layer.cornerRadius = 8.0
-            imageView.clipsToBounds = true
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dateData = self.menuDateKeys[indexPath.row]
-        let postFilter = PostController.shared.posts.filter({$0.date == dateData})
-
-        PostController.shared.selectedPost = postFilter
-        
-        print("SelectedPost: \(PostController.shared.selectedPost)")
-        let didSelectMenuVc = self.storyboard?.instantiateViewController(withIdentifier: "didSelectMenuVc") as! didSelectMenuVcViewController
-        self.navigationController?.pushViewController(didSelectMenuVc, animated: true)
-    }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.menuDateKeys.count
@@ -132,50 +89,6 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         
     }
     
-    func fetchPost() {
-        PostController.shared.posts = [Post]()
-        PostController.shared.posst =  Post()
-        let ref = Database.database().reference().child("postdata").child("\(self.userName)")
-        let refImage = Database.database().reference().child("imageData").child("\(self.userName)")
-        
-        ref.observeSingleEvent(of: .value) { (snap,error) in
-            let postsnap = snap.value as? [String:NSDictionary]
-            if postsnap == nil {
-                return
-            }
-            
-            for (_,post) in postsnap! {
-                PostController.shared.posst = Post()
-                
-                if let date = post["date"] as! String?, let weight = post["weight"] as! String?, let number = post["number"] as! String?, let menu = post["menu"]  as! String?,let key = post["key"] as! String?{
-                    
-                    PostController.shared.posst.date = date
-                    PostController.shared.posst.weight = weight
-                    PostController.shared.posst.number = number
-                    PostController.shared.posst.menu = menu
-                    PostController.shared.posst.key = key                    
-                }
-                PostController.shared.posts.append(PostController.shared.posst)
-            }
-            refImage.observeSingleEvent(of: .value) { (snap,error) in
-                let postsnap = snap.value as? [String:NSDictionary]
-                if postsnap == nil {
-                    return
-                }
-                
-                for (_,post) in postsnap! {
-                    if let date = post["date"] as! String?, let imageData = post["imageData"] as! String?{
-                        self.imageKyes[date] = imageData
-                    }
-                }
-                self.Calculation()
-                self.tableview.reloadData()
-                self.collectionview.reloadData()
-            }
-        }
-    }
-    
-    
     // Firestore
     func fetchFirestore() {
 
@@ -225,7 +138,6 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
                                         }
                                     )}
                                 self.Calculation()
-                                self.tableview.reloadData()
                                 self.collectionview.reloadData()
                             }
                         }
@@ -248,15 +160,12 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
             self.displayName = dName
         }
         self.fetchFirestore()
-        tableview.reloadData()
         collectionview.reloadData()
     }
 
     
     func Calculation() {
         
-//        PostController.shared.mmPost = PostController.shared.posts.filter({$0.month == Month.shared.mm})
-//        let DicMenu = Dictionary(grouping: PostController.shared.mmPost, by: { $0.date })
         let DicMenu = Dictionary(grouping: PostController.shared.posts, by: { $0.date })
 
         self.menuDateKeys = [String](DicMenu.keys)
@@ -265,7 +174,6 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
         
         self.menuDateKeys.sort(by: {$0 > $1})
         print("AfterMenuDate: \(self.menuDateKeys)")
-
         
     }
     
@@ -273,15 +181,11 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableview.delegate = self
-        tableview.dataSource = self
         collectionview.delegate = self
         collectionview.dataSource = self
-        
         refreshController.attributedTitle = NSAttributedString(string: "引っ張って更新")
         refreshController.addTarget(self, action: #selector(reflesh), for: .valueChanged)
         collectionview.addSubview(refreshController)
-        tableview.addSubview(refreshController)
         
     }
     
@@ -293,7 +197,6 @@ class FeedViewController: UIViewController ,UITableViewDelegate ,UITableViewData
     
     @objc func reflesh() {
         self.fetchFirestore()
-        tableview.reloadData()
         collectionview.reloadData()
         refreshController.endRefreshing()
     }

@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class didSelectMenuVcViewController: UIViewController ,UITableViewDelegate ,UITableViewDataSource{
 
     @IBOutlet weak var tableview: UITableView!
+    
+    //Firestore
+    let db = Firestore.firestore()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return PostController.shared.selectedPost.count
@@ -30,8 +34,35 @@ class didSelectMenuVcViewController: UIViewController ,UITableViewDelegate ,UITa
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let key = PostController.shared.selectedPost[indexPath.row].key
+        print("key: \(key)")
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 145
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            let key = PostController.shared.selectedPost[indexPath.row].key
+            guard key != nil else {
+                print("key is nil");
+                return
+            }
+            
+            let ref = self.getMenuCollectionRef()
+            ref.document(key).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
+            PostController.shared.selectedPost.remove(at: indexPath.row)
+            tableview.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
     override func viewDidLoad() {
@@ -41,5 +72,22 @@ class didSelectMenuVcViewController: UIViewController ,UITableViewDelegate ,UITa
         tableview.dataSource = self
         
     }
+
+    // Firestore
+    private func getMenuCollectionRef() -> CollectionReference {
+        guard let uid = User.shared.getUid() else {
+            fatalError ("Uidを取得出来ませんでした。")
+        }
+        return db.collection("PostData").document(uid).collection("Menu")
+    }
+    
+    // Firestore
+    private func getImageDocumentRef() -> CollectionReference {
+        guard let uid = User.shared.getUid() else {
+            fatalError ("Uidを取得出来ませんでした。")
+        }
+        return db.collection("ImageData").document(uid).collection("Image")
+    }
+
     
 }

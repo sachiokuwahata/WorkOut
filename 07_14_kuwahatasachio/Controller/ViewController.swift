@@ -59,13 +59,5 @@ class ViewController: UIViewController ,FBSDKLoginButtonDelegate, UserDelegate{
         User.shared.delegate = self
         User.shared.fblogin()
     }
-
-// FacebookLoginとFirebaseLoginの違いを理解するCheck
-//    @IBAction func checkButton(_ sender: Any) {
-//        let tokennn = FBSDKAccessToken.current()
-//        print("User: \(User.shared.firebaseAuth.currentUser)")
-//        print("token: \(tokennn)")
-//    }
-
 }
 

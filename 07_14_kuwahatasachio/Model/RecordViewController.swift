@@ -23,25 +23,13 @@ class RecordViewController: UIViewController {
         guard let uid = User.shared.getUid() else {
             fatalError("Uidを取得出来ません。")
         }
-        let ref = self.getMenuCollectionRef()
-        
-        
-//        let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("postdata").child("\(userName)")
-        
-        let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
-        
+        let ref = self.getMenuCollectionRef()        
         if keys == "damyy" {
-
-            
-//            let key = rootref.childByAutoId().key
-//            let postFeed = ["\(key)":feed]
-//            rootref.updateChildValues(postFeed)
             
             //Firestore
             let key = ref.document().documentID
             let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key, "year": year, "month": month, "day": day]
-            ref.addDocument(data: feed)
-            
+            ref.document(key).setData(feed)
             self.dismiss(animated: true, completion: nil)
             
         } else {
@@ -49,11 +37,7 @@ class RecordViewController: UIViewController {
             
             let feed = ["date":date, "weight":weight, "number":number ,"menu":menu, "key": key]
             let postFeed = ["\(key)":feed]
-                    
-//            rootref.updateChildValues(postFeed)
-            //SVProgressHUD.dismiss()
-
-            self.dismiss(animated: true, completion: nil)            
+            self.dismiss(animated: true, completion: nil)
         }
         
     }
@@ -68,9 +52,6 @@ class RecordViewController: UIViewController {
         let key = ref.document().documentID
         print("key: \(key)")
         // ココにprintを外すとErrorが生じる
-
-//        let rootref = Database.database().reference(fromURL: "https://muscleshow-b3569.firebaseio.com/").child("imageData").child("\(userName)").child("\(date)")
-//        let key = rootref.childByAutoId().key
 
         let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
         let imageRef = storage.child("\(userName)").child("\(key).jpg")

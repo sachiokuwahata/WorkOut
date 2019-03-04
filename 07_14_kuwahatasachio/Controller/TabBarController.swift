@@ -21,8 +21,8 @@ class TabBarController: UITabBarController , UITabBarControllerDelegate {
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if viewController is RecordPhotoViewController {
-            if let newVC =  tabBarController.storyboard?.instantiateViewController(withIdentifier: "RecordPhotoVC"){ //withIdentifier: にはStory Board IDを設定
+        if viewController is RecordLogViewController {
+            if let newVC =  tabBarController.storyboard?.instantiateViewController(withIdentifier: "RecordLogVC"){ //withIdentifier: にはStory Board IDを設定
                 tabBarController.present(newVC, animated: true, completion: nil)//newVCで設定したページに遷移
                 return false
             }
