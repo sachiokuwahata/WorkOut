@@ -13,7 +13,8 @@ import FirebaseFirestore
 class TotalingViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
     
     var userName = String()
-
+    var menuKeyssss = [String]()
+    
     var totals = [Toatal]()
     var totaln = Toatal()
 
@@ -38,9 +39,24 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectMenu = self.menuKeyssss[indexPath.row]
+        var postFilter = PostController.shared.posts.filter({$0.menu == selectMenu})
+        postFilter = postFilter.sorted(by:{$0.date > $1.date})
+        PostController.shared.menuSelectPost = postFilter
+        print("SelectedPost: \(PostController.shared.menuSelectPost)")
+        
+        let didSelectMenuVcVol2 = self.storyboard?.instantiateViewController(withIdentifier: "didSelectMenuVcVol2") as! didSelectMenuVcVol2ViewController
+        self.navigationController?.pushViewController(didSelectMenuVcVol2, animated: true)
+
+        tableview.deselectRow(at: indexPath, animated: true)
+
+    }
+    
     private func prepareData() {
         let Dic = Dictionary(grouping: PostController.shared.posts, by: { $0.menu })
         let menukeys = [String](Dic.keys)
+        self.menuKeyssss = [String](Dic.keys)
         if menukeys == [] { return }
         print("menukeys: \(menukeys)")
 
@@ -49,22 +65,17 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
         for menukey in menukeys {
             self.totaln = Toatal()
             var totalnumber: Int = 0
-
-//            let menuNumCount = Dic[menukey]?.count as! Int
             
             if let menuNumCount = Dic[menukey]?.count {
                 for i in 0..<menuNumCount{
                     totalnumber = totalnumber + Int((Dic[menukey]?[i].number)!)!
                 }
-            }
-            
+            }   
             self.totaln.menu = menukey
             self.totaln.number = totalnumber
             self.totals.append(self.totaln)
             self.tableview.reloadData()
         }
-
-        
     }
     
     // Firestore
@@ -108,45 +119,8 @@ class TotalingViewController: UIViewController ,UITableViewDataSource,UITableVie
         }
     }
 
-    
-//    func fetchPost() {
-//        
-//        PostController.shared.posts = [Post]()
-//        PostController.shared.posst =  Post()
-//        let ref = Database.database().reference().child("postdata").child("\(String(describing: self.userName))")
-//        
-//        ref.observeSingleEvent(of: .value) { (snap,error) in
-//            
-//            let postsnap = snap.value as? [String:NSDictionary]
-//            
-//            if postsnap == nil {
-//                return
-//            }
-//            
-//            for (_,post) in postsnap! {
-//                PostController.shared.posst = Post()
-//                
-//                if let date = post["date"] as! String?, let weight = post["weight"] as! String?, let number = post["number"] as! String?, let menu = post["menu"]  as! String?,let key = post["key"] as! String?{
-//                    
-//                    PostController.shared.posst.date = date
-//                    PostController.shared.posst.weight = weight
-//                    PostController.shared.posst.number = number
-//                    PostController.shared.posst.menu = menu
-//                    PostController.shared.posst.key = key
-//                    
-//                }
-//                PostController.shared.posts.append(PostController.shared.posst)
-//            }
-//         self.prepareData()
-//         self.tableview.reloadData()
-//        }
-//        
-//    }
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.fetchPost()
         self.fetchFirestore()
     }
 

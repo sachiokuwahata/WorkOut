@@ -118,14 +118,11 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         //Facebookｂ認証
         if let user = User.shared.firebaseAuth.currentUser?.uid {
             self.userName = user
         }
-
         tableview.reloadData()
-        
     }
     
     override func viewDidLoad() {
@@ -145,7 +142,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         UserDefaults.standard.set("0", forKey: "selectWeight")
         UserDefaults.standard.set("0", forKey: "selectNumber")
         UserDefaults.standard.set("---------", forKey: "selectMenu")
-        UserDefaults.standard.set("yyyy年mm月dd日", forKey: "selectDate")
+        UserDefaults.standard.set("日付", forKey: "selectDate")
         
     }
     
@@ -215,6 +212,10 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableview.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         guard indexPath.row != 0 else {
@@ -278,6 +279,12 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             return false
         }
 
+        guard self.posst.date != "日付", self.posst.weight != "" else {
+            let title:String = "日付を入力して下さい。"
+            let message:String = ""
+            displayAlert(title: title, message: message)
+            return false
+        }
         
         guard self.posst.weight != "0", self.posst.weight != "" else {
             let title:String = "重さを入力して下さい。"
