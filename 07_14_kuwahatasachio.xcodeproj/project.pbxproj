@@ -87,6 +87,8 @@
 		1C1FB04B21F85EE900F92866 /* old */ = {
 			isa = PBXGroup;
 			children = (
+				1CB33F2C221C546B0052FD71 /* RecordDateViewController.swift */,
+				1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */,
 			);
 			path = old;
 			sourceTree = "<group>";
@@ -160,8 +162,6 @@
 				1C1FB04C21F861A700F92866 /* InputMenuViewController.swift */,
 				1C1FB04921F8471A00F92866 /* InputRecordvol2ViewController.swift */,
 				1C221196222BF24800EC9164 /* InputDateViewController.swift */,
-				1CB33F2C221C546B0052FD71 /* RecordDateViewController.swift */,
-				1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */,
 				1C01A8002223EEA7008BF01A /* RecordLogViewController.swift */,
 				1C6B4DAB21F97BF300AB4FEA /* TotalingViewController.swift */,
 				1C409CC321F5ACFD0029CBD0 /* EditViewController.swift */,

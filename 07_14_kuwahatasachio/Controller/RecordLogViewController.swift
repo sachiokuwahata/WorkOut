@@ -214,6 +214,20 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             return indexPath
         }
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard indexPath.row != 0 else {
+            return
+        }
+        
+        if editingStyle == .delete {
+            let row = indexPath.row - 1
+            posts.remove(at: row)
+            tableview.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
 
     @objc func dateLogButton(_ sender: Any) {
         print("datebutton")
