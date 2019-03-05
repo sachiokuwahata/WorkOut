@@ -52,8 +52,12 @@ class InputRecordvol2ViewController: UIViewController ,UIPickerViewDelegate,UIPi
     
     @IBAction func ok(_ sender: Any) {
         
-        UserDefaults.standard.set(self.selectNumber, forKey: "selectNumber")
-        UserDefaults.standard.set(self.selectWeight, forKey: "selectWeight")
+//        UserDefaults.standard.set(self.selectNumber, forKey: "selectNumber")
+//        UserDefaults.standard.set(self.selectWeight, forKey: "selectWeight")
+
+        PostController.shared.inputPost.weight = self.selectWeight
+        PostController.shared.inputPost.number = self.selectNumber
+        
         self.dismiss(animated: true, completion: nil)
         
     }

@@ -28,8 +28,8 @@ class InputMenuViewController: UIViewController ,UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        UserDefaults.standard.set(self.menuList[indexPath.row], forKey: "selectMenu")
-        print("menuList[indexPath.row]: \(menuList[indexPath.row])")
+//        UserDefaults.standard.set(self.menuList[indexPath.row], forKey: "selectMenu")
+        PostController.shared.inputPost.menu = self.menuList[indexPath.row]
         self.dismiss(animated: true, completion: nil)
     }
 

@@ -13,6 +13,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     
     var posts = [Post]()
     var posst = Post()
+
     var data:NSData = NSData()
     var Today = String()
     var TodayYMD = [String]()
@@ -30,7 +31,6 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     @IBOutlet weak var mainImageView: UIImageView!
     
     @IBAction func tapImageView(_ sender: Any) {
-        print("imageviewTAp")
         let alert = UIAlertController(title: "", message: "選択してください", preferredStyle: UIAlertController.Style.actionSheet)
         
         alert.addAction(UIAlertAction(title: "カメラ", style: UIAlertAction.Style.default, handler: {
@@ -107,12 +107,11 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         }
         
         RecordViewController.shared.imageSet(date: self.Today, userName:self.userName, imageData:data)        
-        //self.navigationController?.popViewController(animated: true)
+
         self.tabBarController!.selectedIndex = 0
         self.posts = [Post]()
+        PostController.shared.inputPost = Post()
         
-//        self.navigationController?.popToRootViewController(animated: true)
-
     }
     
     
@@ -127,6 +126,8 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        PostController.shared.inputPost = Post()
         
         tableview.delegate = self
         tableview.dataSource = self
@@ -147,46 +148,98 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count + 1
+        return posts.count + 5
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 355
         }
-        return 95
+        return 80
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "RecordCell", for: indexPath)
-
-            let dateLabel = cell.viewWithTag(1) as! UILabel
-            let dateButton = cell.viewWithTag(8) as! UIButton
-            let menuButton = cell.viewWithTag(2) as! UIButton
-            let menuTextField = cell.viewWithTag(3) as! UITextField
-            let logButton = cell.viewWithTag(4) as! UIButton
-            let weightTextField = cell.viewWithTag(5) as! UITextField
-            let numberTextField = cell.viewWithTag(6) as! UITextField
-            let addButton = cell.viewWithTag(7) as! UIButton
-            
-            menuButton.addTarget(self, action: #selector(menuPutButton), for: .touchUpInside)
-            logButton.addTarget(self, action: #selector(logPutButton), for: .touchUpInside)
-            addButton.addTarget(self, action: #selector(addDataButton), for: .touchUpInside)
-            dateButton.addTarget(self, action: #selector(dateLogButton), for: .touchUpInside)
-            
-            dateText = UserDefaults.standard.object(forKey: "selectDate") as! String
-            menuText = UserDefaults.standard.object(forKey: "selectMenu") as! String
-            weightText = UserDefaults.standard.object(forKey: "selectWeight") as! String
-            numberText = UserDefaults.standard.object(forKey: "selectNumber") as! String
-            
-            dateLabel.text = dateText
-            menuTextField.text = menuText
-            weightTextField.text = weightText
-            numberTextField.text = numberText
+//
+//            let dateLabel = cell.viewWithTag(1) as! UILabel
+//            let dateButton = cell.viewWithTag(8) as! UIButton
+//            let menuButton = cell.viewWithTag(2) as! UIButton
+//            let menuTextField = cell.viewWithTag(3) as! UITextField
+//            let logButton = cell.viewWithTag(4) as! UIButton
+//            let weightTextField = cell.viewWithTag(5) as! UITextField
+//            let numberTextField = cell.viewWithTag(6) as! UITextField
+//            let addButton = cell.viewWithTag(7) as! UIButton
+//            
+//            menuButton.addTarget(self, action: #selector(menuPutButton), for: .touchUpInside)
+//            logButton.addTarget(self, action: #selector(logPutButton), for: .touchUpInside)
+//            addButton.addTarget(self, action: #selector(addDataButton), for: .touchUpInside)
+//            dateButton.addTarget(self, action: #selector(dateLogButton), for: .touchUpInside)
+//            
+//            dateText = UserDefaults.standard.object(forKey: "selectDate") as! String
+//            menuText = UserDefaults.standard.object(forKey: "selectMenu") as! String
+//            weightText = UserDefaults.standard.object(forKey: "selectWeight") as! String
+//            numberText = UserDefaults.standard.object(forKey: "selectNumber") as! String
+//            
+//            dateLabel.text = dateText
+//            menuTextField.text = menuText
+//            weightTextField.text = weightText
+//            numberTextField.text = numberText
             
             return cell
+        } else if indexPath.row == 1 {
+            let cell = tableview.dequeueReusableCell(withIdentifier: "TextLabelCell", for: indexPath)
+            
+            let Label = cell.viewWithTag(1) as! UILabel
+            
+            if PostController.shared.inputPost.date == "" {
+                Label.text = "日付けを入力して下さい"
+                Label.textColor = UIColor.lightGray
+                return cell
+            } else {
+                Label.text = PostController.shared.inputPost.date
+                Label.textColor = UIColor.black
+            }
+                return cell
+        } else if indexPath.row == 2 {
+            let cell = tableview.dequeueReusableCell(withIdentifier: "TextLabelCell", for: indexPath)
+            
+            let Label = cell.viewWithTag(1) as! UILabel
+            
+            if PostController.shared.inputPost.menu == "" {
+                Label.text = "メニューけを入力して下さい"
+                Label.textColor = UIColor.lightGray
+                return cell
+            } else {
+                Label.text = PostController.shared.inputPost.menu
+                Label.textColor = UIColor.black
+            }
+            return cell
+
+        } else if indexPath.row == 3 {
+            let cell = tableview.dequeueReusableCell(withIdentifier: "TextLabelCell", for: indexPath)
+            
+            let Label = cell.viewWithTag(1) as! UILabel
+            
+            if PostController.shared.inputPost.weight == "",PostController.shared.inputPost.number == "" {
+                Label.text = "重量 × 回数を入力して下さい"
+                Label.textColor = UIColor.lightGray
+                return cell
+            } else {
+                Label.text = "\(PostController.shared.inputPost.weight) Kg × \(PostController.shared.inputPost.number) 回"
+                Label.textColor = UIColor.black
+            }
+            return cell
+            
+        } else if indexPath.row == 4 {
+            let cell = tableview.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
+            
+            let addButton = cell.viewWithTag(1) as! UIButton
+            addButton.addTarget(self, action: #selector(addDataButton), for: .touchUpInside)
+            
+            return cell
+            
         }
         
         let cell = tableview.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath)
@@ -195,7 +248,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         let weightLabel = cell.viewWithTag(2) as! UITextField
         let numberLabel = cell.viewWithTag(3) as! UITextField
         
-        let row = indexPath.row - 1
+        let row = indexPath.row - 5
         menuLabel.text = self.posts[row].menu
         weightLabel.text = self.posts[row].weight
         numberLabel.text = self.posts[row].number
@@ -213,6 +266,18 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == 1 {
+            let inputDateVC = storyboard!.instantiateViewController(withIdentifier: "inputDateVC")
+            self.present(inputDateVC,animated: true, completion: nil)
+        } else if indexPath.row == 2 {
+            let inputMenu = storyboard!.instantiateViewController(withIdentifier: "inputMenu")
+            self.present(inputMenu,animated: true, completion: nil)
+        } else if indexPath.row == 3 {
+            let inputRecordvol2 = storyboard!.instantiateViewController(withIdentifier: "inputRecordvol2")
+            self.present(inputRecordvol2,animated: true, completion: nil)
+        }
+            
         tableview.deselectRow(at: indexPath, animated: true)
     }
     
@@ -250,10 +315,16 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     @objc func addDataButton(_ sender: Any) {
         self.posst = Post()
         
-        self.posst.date = UserDefaults.standard.object(forKey: "selectDate") as! String
-        self.posst.weight = self.weightText
-        self.posst.number = self.numberText
-        self.posst.menu = self.menuText
+//        self.posst.date = UserDefaults.standard.object(forKey: "selectDate") as! String
+//        self.posst.weight = self.weightText
+//        self.posst.number = self.numberText
+//        self.posst.menu = self.menuText
+        
+        self.posst.date = PostController.shared.inputPost.date
+        self.posst.weight = PostController.shared.inputPost.weight
+        self.posst.number = PostController.shared.inputPost.number
+        self.posst.menu = PostController.shared.inputPost.menu
+
         
         guard self.validate() else {
             return
@@ -264,6 +335,9 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         UserDefaults.standard.set("0", forKey: "selectWeight")
         UserDefaults.standard.set("0", forKey: "selectNumber")
         UserDefaults.standard.set("---------", forKey: "selectMenu")
+        
+        // inputPostのリセット化
+        PostController.shared.inputPost = Post()
         
         print(self.posts)
         self.tableview.reloadData()

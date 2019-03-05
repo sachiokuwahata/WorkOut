@@ -55,8 +55,9 @@ class FeedViewController: UIViewController ,UICollectionViewDataSource ,UICollec
         
         PostController.shared.selectedPost = postFilter
         
-        print("SelectedPost: \(PostController.shared.selectedPost)")
         let didSelectMenuVc = self.storyboard?.instantiateViewController(withIdentifier: "didSelectMenuVc") as! didSelectMenuVcViewController
+        
+        didSelectMenuVc.title = "\(dateData)のMenu"
         self.navigationController?.pushViewController(didSelectMenuVc, animated: true)
     }
     
@@ -71,24 +72,7 @@ class FeedViewController: UIViewController ,UICollectionViewDataSource ,UICollec
         return CGSize(width: cellSize, height: cellSizeHight)
         
     }
-    
-    @objc func edit(_ sender:TableButton){
-        print(sender.indexpath)
-        let editVC = self.storyboard?.instantiateViewController(withIdentifier: "editVC") as! EditViewController
-
-        // editVCへ編集データの受け渡し
-        editVC.indexpath = sender.indexpath! // Int()
-        editVC.menu = sender.menu! // String()
-        editVC.date = sender.date! // String()
-        editVC.number = sender.number! // String()
-        editVC.weight = sender.weight! // String()
-        editVC.key = sender.key! // String()
-//        editVC.imageData = sender.imageData! // NSData()
         
-        self.navigationController?.pushViewController(editVC, animated: true)
-        
-    }
-    
     // Firestore
     func fetchFirestore() {
 

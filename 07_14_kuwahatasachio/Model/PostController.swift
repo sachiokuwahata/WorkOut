@@ -20,4 +20,6 @@ class PostController: NSObject {
     var posts = [Post]()
     var posst = Post()
     
+    var inputPost = Post()
+    
 }
