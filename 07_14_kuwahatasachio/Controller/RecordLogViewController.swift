@@ -148,12 +148,18 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count + 5
+        return posts.count + 4
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 355
+            return 70
+        } else if indexPath.row == 1 {
+            return 70
+        } else if indexPath.row == 2 {
+            return 70
+        } else if indexPath.row == 3 {
+            return 70
         }
         return 80
     }
@@ -161,34 +167,6 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = tableview.dequeueReusableCell(withIdentifier: "RecordCell", for: indexPath)
-//
-//            let dateLabel = cell.viewWithTag(1) as! UILabel
-//            let dateButton = cell.viewWithTag(8) as! UIButton
-//            let menuButton = cell.viewWithTag(2) as! UIButton
-//            let menuTextField = cell.viewWithTag(3) as! UITextField
-//            let logButton = cell.viewWithTag(4) as! UIButton
-//            let weightTextField = cell.viewWithTag(5) as! UITextField
-//            let numberTextField = cell.viewWithTag(6) as! UITextField
-//            let addButton = cell.viewWithTag(7) as! UIButton
-//            
-//            menuButton.addTarget(self, action: #selector(menuPutButton), for: .touchUpInside)
-//            logButton.addTarget(self, action: #selector(logPutButton), for: .touchUpInside)
-//            addButton.addTarget(self, action: #selector(addDataButton), for: .touchUpInside)
-//            dateButton.addTarget(self, action: #selector(dateLogButton), for: .touchUpInside)
-//            
-//            dateText = UserDefaults.standard.object(forKey: "selectDate") as! String
-//            menuText = UserDefaults.standard.object(forKey: "selectMenu") as! String
-//            weightText = UserDefaults.standard.object(forKey: "selectWeight") as! String
-//            numberText = UserDefaults.standard.object(forKey: "selectNumber") as! String
-//            
-//            dateLabel.text = dateText
-//            menuTextField.text = menuText
-//            weightTextField.text = weightText
-//            numberTextField.text = numberText
-            
-            return cell
-        } else if indexPath.row == 1 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "TextLabelCell", for: indexPath)
             
             let Label = cell.viewWithTag(1) as! UILabel
@@ -202,7 +180,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
                 Label.textColor = UIColor.black
             }
                 return cell
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 1 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "TextLabelCell", for: indexPath)
             
             let Label = cell.viewWithTag(1) as! UILabel
@@ -217,7 +195,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             }
             return cell
 
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 2 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "TextLabelCell", for: indexPath)
             
             let Label = cell.viewWithTag(1) as! UILabel
@@ -232,7 +210,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             }
             return cell
             
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 3 {
             let cell = tableview.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
             
             let addButton = cell.viewWithTag(1) as! UIButton
@@ -248,7 +226,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         let weightLabel = cell.viewWithTag(2) as! UITextField
         let numberLabel = cell.viewWithTag(3) as! UITextField
         
-        let row = indexPath.row - 5
+        let row = indexPath.row - 4
         menuLabel.text = self.posts[row].menu
         weightLabel.text = self.posts[row].weight
         numberLabel.text = self.posts[row].number
@@ -256,24 +234,24 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        switch indexPath.row {
-        case 0:
-            return nil
-        default:
-            return indexPath
-        }
-    }
+//    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+//        switch indexPath.row {
+//        case 0:
+//            return nil
+//        default:
+//            return indexPath
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 1 {
+        if indexPath.row == 0 {
             let inputDateVC = storyboard!.instantiateViewController(withIdentifier: "inputDateVC")
             self.present(inputDateVC,animated: true, completion: nil)
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 1 {
             let inputMenu = storyboard!.instantiateViewController(withIdentifier: "inputMenu")
             self.present(inputMenu,animated: true, completion: nil)
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 2 {
             let inputRecordvol2 = storyboard!.instantiateViewController(withIdentifier: "inputRecordvol2")
             self.present(inputRecordvol2,animated: true, completion: nil)
         }
@@ -286,31 +264,40 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         guard indexPath.row != 0 else {
             return
         }
-        
+        guard indexPath.row != 1 else {
+            return
+        }
+        guard indexPath.row != 2 else {
+            return
+        }
+        guard indexPath.row != 3 else {
+            return
+        }
+
         if editingStyle == .delete {
-            let row = indexPath.row - 1
+            let row = indexPath.row - 4
             posts.remove(at: row)
             tableview.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
 
-    @objc func dateLogButton(_ sender: Any) {
-        print("datebutton")
-        let inputDateVC = storyboard!.instantiateViewController(withIdentifier: "inputDateVC")
-        self.present(inputDateVC,animated: true, completion: nil)
-    }
+//    @objc func dateLogButton(_ sender: Any) {
+//        print("datebutton")
+//        let inputDateVC = storyboard!.instantiateViewController(withIdentifier: "inputDateVC")
+//        self.present(inputDateVC,animated: true, completion: nil)
+//    }
 
     
-    @objc func logPutButton(_ sender: Any) {
-        let inputRecordvol2 = storyboard!.instantiateViewController(withIdentifier: "inputRecordvol2")
-        self.present(inputRecordvol2,animated: true, completion: nil)
-    }
+//    @objc func logPutButton(_ sender: Any) {
+//        let inputRecordvol2 = storyboard!.instantiateViewController(withIdentifier: "inputRecordvol2")
+//        self.present(inputRecordvol2,animated: true, completion: nil)
+//    }
     
-    @objc func menuPutButton(_ sender: Any) {
-        let inputMenu = storyboard!.instantiateViewController(withIdentifier: "inputMenu")
-        self.present(inputMenu,animated: true, completion: nil)
-    }
+//    @objc func menuPutButton(_ sender: Any) {
+//        let inputMenu = storyboard!.instantiateViewController(withIdentifier: "inputMenu")
+//        self.present(inputMenu,animated: true, completion: nil)
+//    }
     
     @objc func addDataButton(_ sender: Any) {
         self.posst = Post()
@@ -353,7 +340,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             return false
         }
 
-        guard self.posst.date != "日付", self.posst.weight != "" else {
+        guard self.posst.date != "日付", self.posst.date != "" else {
             let title:String = "日付を入力して下さい。"
             let message:String = ""
             displayAlert(title: title, message: message)
@@ -368,13 +355,13 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         }
         
         guard self.posst.number != "0", self.posst.number != "" else {
-            let title:String = "数字を入力して下さい。"
+            let title:String = "回数を入力して下さい。"
             let message:String = ""
             displayAlert(title: title, message: message)
             return false
         }
         
-        guard self.posst.menu != "---------", self.posst.number != "" else {
+        guard self.posst.menu != "" else {
             let title:String = "メニューを入力して下さい。"
             let message:String = ""
             displayAlert(title: title, message: message)
