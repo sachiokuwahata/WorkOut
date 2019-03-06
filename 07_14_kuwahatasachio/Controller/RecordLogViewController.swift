@@ -16,6 +16,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
 
     var data:NSData = NSData()
     var Today = String()
+    
     var TodayYMD = [String]()
     
     var userName = String()
@@ -89,7 +90,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         
         let userName = self.userName
         let keys = "damyy"
-        self.Today = UserDefaults.standard.object(forKey: "selectDate") as! String
+
         self.TodayYMD = (self.Today.components(separatedBy: NSCharacterSet.decimalDigits.inverted))
         
         for post in posts {
@@ -106,7 +107,7 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             RecordViewController.shared.dataSet(date: date,weight: weight,number: number,menu: menu,keys: keys,userName:userName,year:year,month:month,day:day)
         }
         
-        RecordViewController.shared.imageSet(date: self.Today, userName:self.userName, imageData:data)        
+        RecordViewController.shared.imageSet(date: self.Today, userName:self.userName, imageData:data)
 
         self.tabBarController!.selectedIndex = 0
         self.posts = [Post]()
@@ -319,12 +320,14 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         
         self.posts.append(self.posst)
         
-        UserDefaults.standard.set("0", forKey: "selectWeight")
-        UserDefaults.standard.set("0", forKey: "selectNumber")
-        UserDefaults.standard.set("---------", forKey: "selectMenu")
+//        UserDefaults.standard.set("0", forKey: "selectWeight")
+//        UserDefaults.standard.set("0", forKey: "selectNumber")
+//        UserDefaults.standard.set("---------", forKey: "selectMenu")
         
         // inputPostのリセット化
+        self.Today = PostController.shared.inputPost.date
         PostController.shared.inputPost = Post()
+        PostController.shared.inputPost.date = self.Today
         
         print(self.posts)
         self.tableview.reloadData()

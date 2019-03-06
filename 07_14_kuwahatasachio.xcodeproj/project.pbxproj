@@ -28,8 +28,8 @@
 		1C8B6F2321F579E1003CA72B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F2221F579E1003CA72B /* FeedViewController.swift */; };
 		1C8B6F2921F5835C003CA72B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F2821F5835C003CA72B /* Post.swift */; };
 		1C8B6F2F21F586A0003CA72B /* TableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F2E21F586A0003CA72B /* TableButton.swift */; };
-		1C8B6F3121F58C29003CA72B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C8B6F3021F58C29003CA72B /* GoogleService-Info.plist */; };
 		1C8B6F3521F5957D003CA72B /* RecordPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */; };
+		1C95DACB222FFE15002E0154 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C95DACA222FFE15002E0154 /* GoogleService-Info.plist */; };
 		1C97029E221E803C003F4F1E /* didSelectMenuVcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C97029D221E803B003F4F1E /* didSelectMenuVcViewController.swift */; };
 		1C9702A0221E8426003F4F1E /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C97029F221E8426003F4F1E /* PostController.swift */; };
 		1C9702A3221E8974003F4F1E /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9702A2221E8974003F4F1E /* ExtensionViewController.swift */; };
@@ -61,8 +61,8 @@
 		1C8B6F2221F579E1003CA72B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		1C8B6F2821F5835C003CA72B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1C8B6F2E21F586A0003CA72B /* TableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableButton.swift; sourceTree = "<group>"; };
-		1C8B6F3021F58C29003CA72B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPhotoViewController.swift; sourceTree = "<group>"; };
+		1C95DACA222FFE15002E0154 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C97029D221E803B003F4F1E /* didSelectMenuVcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = didSelectMenuVcViewController.swift; sourceTree = "<group>"; };
 		1C97029F221E8426003F4F1E /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		1C9702A2221E8974003F4F1E /* ExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 				1C8B6F0E21F5756D003CA72B /* AppDelegate.swift */,
 				1C8B6F2E21F586A0003CA72B /* TableButton.swift */,
 				1C8B6F1221F5756D003CA72B /* Main.storyboard */,
-				1C8B6F3021F58C29003CA72B /* GoogleService-Info.plist */,
+				1C95DACA222FFE15002E0154 /* GoogleService-Info.plist */,
 				1C8B6F1521F57572003CA72B /* Assets.xcassets */,
 				1C8B6F1721F57572003CA72B /* LaunchScreen.storyboard */,
 				1C8B6F1A21F57572003CA72B /* Info.plist */,
@@ -256,7 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C8B6F1921F57572003CA72B /* LaunchScreen.storyboard in Resources */,
-				1C8B6F3121F58C29003CA72B /* GoogleService-Info.plist in Resources */,
+				1C95DACB222FFE15002E0154 /* GoogleService-Info.plist in Resources */,
 				1C8B6F1621F57572003CA72B /* Assets.xcassets in Resources */,
 				1C8B6F1421F5756D003CA72B /* Main.storyboard in Resources */,
 			);

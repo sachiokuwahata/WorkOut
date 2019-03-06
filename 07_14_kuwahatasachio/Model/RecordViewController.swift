@@ -53,7 +53,7 @@ class RecordViewController: UIViewController {
         print("key: \(key)")
         // ココにprintを外すとErrorが生じる
 
-        let storage = Storage.storage().reference(forURL: "gs://muscleshow-b3569.appspot.com/")
+        let storage = Storage.storage().reference()
         let imageRef = storage.child("\(userName)").child("\(key).jpg")
         
         print("Image: \(imageData)")
