@@ -113,6 +113,11 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         self.posts = [Post]()
         PostController.shared.inputPost = Post()
         
+        //imageView初期化
+        self.imageChanged = false
+        mainImageView.image = UIImage.init(named: "NotImage")
+        
+        
     }
     
     
@@ -141,11 +146,6 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
             case .restricted:break
             }
         }
-        UserDefaults.standard.set("0", forKey: "selectWeight")
-        UserDefaults.standard.set("0", forKey: "selectNumber")
-        UserDefaults.standard.set("---------", forKey: "selectMenu")
-        UserDefaults.standard.set("日付", forKey: "selectDate")
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -282,31 +282,9 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         }
     }
 
-
-//    @objc func dateLogButton(_ sender: Any) {
-//        print("datebutton")
-//        let inputDateVC = storyboard!.instantiateViewController(withIdentifier: "inputDateVC")
-//        self.present(inputDateVC,animated: true, completion: nil)
-//    }
-
-    
-//    @objc func logPutButton(_ sender: Any) {
-//        let inputRecordvol2 = storyboard!.instantiateViewController(withIdentifier: "inputRecordvol2")
-//        self.present(inputRecordvol2,animated: true, completion: nil)
-//    }
-    
-//    @objc func menuPutButton(_ sender: Any) {
-//        let inputMenu = storyboard!.instantiateViewController(withIdentifier: "inputMenu")
-//        self.present(inputMenu,animated: true, completion: nil)
-//    }
     
     @objc func addDataButton(_ sender: Any) {
         self.posst = Post()
-        
-//        self.posst.date = UserDefaults.standard.object(forKey: "selectDate") as! String
-//        self.posst.weight = self.weightText
-//        self.posst.number = self.numberText
-//        self.posst.menu = self.menuText
         
         self.posst.date = PostController.shared.inputPost.date
         self.posst.weight = PostController.shared.inputPost.weight
@@ -319,10 +297,6 @@ class RecordLogViewController: UIViewController ,UITableViewDelegate ,UITableVie
         }
         
         self.posts.append(self.posst)
-        
-//        UserDefaults.standard.set("0", forKey: "selectWeight")
-//        UserDefaults.standard.set("0", forKey: "selectNumber")
-//        UserDefaults.standard.set("---------", forKey: "selectMenu")
         
         // inputPostのリセット化
         self.Today = PostController.shared.inputPost.date

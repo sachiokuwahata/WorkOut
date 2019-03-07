@@ -13,9 +13,7 @@
 		1C2093D321FB0F41007D1B15 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2093D221FB0F41007D1B15 /* TabBarController.swift */; };
 		1C221197222BF24800EC9164 /* InputDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C221196222BF24800EC9164 /* InputDateViewController.swift */; };
 		1C2D60A0222D58C8002E52DB /* didSelectMenuVcVol2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D609F222D58C8002E52DB /* didSelectMenuVcVol2ViewController.swift */; };
-		1C396E1E21F5CB77009E91F0 /* DeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C396E1D21F5CB77009E91F0 /* DeleteViewController.swift */; };
 		1C409CC221F59AFD0029CBD0 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C409CC121F59AFD0029CBD0 /* RecordViewController.swift */; };
-		1C409CC421F5ACFD0029CBD0 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C409CC321F5ACFD0029CBD0 /* EditViewController.swift */; };
 		1C56103D22167A38007DD4BC /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C56103C22167A38007DD4BC /* LogoutViewController.swift */; };
 		1C601D5C22131BFE00454C1E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C601D5B22131BFE00454C1E /* User.swift */; };
 		1C6B4DAC21F97BF300AB4FEA /* TotalingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B4DAB21F97BF300AB4FEA /* TotalingViewController.swift */; };
@@ -28,12 +26,10 @@
 		1C8B6F2321F579E1003CA72B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F2221F579E1003CA72B /* FeedViewController.swift */; };
 		1C8B6F2921F5835C003CA72B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F2821F5835C003CA72B /* Post.swift */; };
 		1C8B6F2F21F586A0003CA72B /* TableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F2E21F586A0003CA72B /* TableButton.swift */; };
-		1C8B6F3521F5957D003CA72B /* RecordPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */; };
 		1C95DACB222FFE15002E0154 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C95DACA222FFE15002E0154 /* GoogleService-Info.plist */; };
 		1C97029E221E803C003F4F1E /* didSelectMenuVcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C97029D221E803B003F4F1E /* didSelectMenuVcViewController.swift */; };
 		1C9702A0221E8426003F4F1E /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C97029F221E8426003F4F1E /* PostController.swift */; };
 		1C9702A3221E8974003F4F1E /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9702A2221E8974003F4F1E /* ExtensionViewController.swift */; };
-		1CB33F2D221C546B0052FD71 /* RecordDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB33F2C221C546B0052FD71 /* RecordDateViewController.swift */; };
 		D9778227DBE1D0FCAAE63D91 /* Pods_07_14_kuwahatasachio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0A075A845D872CDBE286ED /* Pods_07_14_kuwahatasachio.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,9 +40,7 @@
 		1C2093D221FB0F41007D1B15 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1C221196222BF24800EC9164 /* InputDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDateViewController.swift; sourceTree = "<group>"; };
 		1C2D609F222D58C8002E52DB /* didSelectMenuVcVol2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = didSelectMenuVcVol2ViewController.swift; sourceTree = "<group>"; };
-		1C396E1D21F5CB77009E91F0 /* DeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteViewController.swift; sourceTree = "<group>"; };
 		1C409CC121F59AFD0029CBD0 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
-		1C409CC321F5ACFD0029CBD0 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		1C56103C22167A38007DD4BC /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		1C601D5B22131BFE00454C1E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1C6B4DAB21F97BF300AB4FEA /* TotalingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalingViewController.swift; sourceTree = "<group>"; };
@@ -61,12 +55,10 @@
 		1C8B6F2221F579E1003CA72B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		1C8B6F2821F5835C003CA72B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1C8B6F2E21F586A0003CA72B /* TableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableButton.swift; sourceTree = "<group>"; };
-		1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPhotoViewController.swift; sourceTree = "<group>"; };
 		1C95DACA222FFE15002E0154 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C97029D221E803B003F4F1E /* didSelectMenuVcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = didSelectMenuVcViewController.swift; sourceTree = "<group>"; };
 		1C97029F221E8426003F4F1E /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		1C9702A2221E8974003F4F1E /* ExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
-		1CB33F2C221C546B0052FD71 /* RecordDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDateViewController.swift; sourceTree = "<group>"; };
 		7B0A075A845D872CDBE286ED /* Pods_07_14_kuwahatasachio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_07_14_kuwahatasachio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85A92FDF8D42DB222F68C1FA /* Pods-07_14_kuwahatasachio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-07_14_kuwahatasachio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-07_14_kuwahatasachio/Pods-07_14_kuwahatasachio.debug.xcconfig"; sourceTree = "<group>"; };
 		8790B3E7A52BABEA2CEC5186 /* Pods-07_14_kuwahatasachio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-07_14_kuwahatasachio.release.xcconfig"; path = "Pods/Target Support Files/Pods-07_14_kuwahatasachio/Pods-07_14_kuwahatasachio.release.xcconfig"; sourceTree = "<group>"; };
@@ -87,9 +79,6 @@
 		1C1FB04B21F85EE900F92866 /* old */ = {
 			isa = PBXGroup;
 			children = (
-				1CB33F2C221C546B0052FD71 /* RecordDateViewController.swift */,
-				1C409CC321F5ACFD0029CBD0 /* EditViewController.swift */,
-				1C8B6F3421F5957D003CA72B /* RecordPhotoViewController.swift */,
 			);
 			path = old;
 			sourceTree = "<group>";
@@ -145,7 +134,6 @@
 				1C97029F221E8426003F4F1E /* PostController.swift */,
 				1C409CC121F59AFD0029CBD0 /* RecordViewController.swift */,
 				1C601D5B22131BFE00454C1E /* User.swift */,
-				1C396E1D21F5CB77009E91F0 /* DeleteViewController.swift */,
 				1C6B4DAD21F9B77000AB4FEA /* Toatal.swift */,
 			);
 			path = Model;
@@ -375,14 +363,10 @@
 				1C2D60A0222D58C8002E52DB /* didSelectMenuVcVol2ViewController.swift in Sources */,
 				1C221197222BF24800EC9164 /* InputDateViewController.swift in Sources */,
 				1C01A8012223EEA7008BF01A /* RecordLogViewController.swift in Sources */,
-				1C8B6F3521F5957D003CA72B /* RecordPhotoViewController.swift in Sources */,
 				1C6B4DAE21F9B77000AB4FEA /* Toatal.swift in Sources */,
 				1C9702A3221E8974003F4F1E /* ExtensionViewController.swift in Sources */,
 				1C9702A0221E8426003F4F1E /* PostController.swift in Sources */,
-				1CB33F2D221C546B0052FD71 /* RecordDateViewController.swift in Sources */,
 				1C8B6F2921F5835C003CA72B /* Post.swift in Sources */,
-				1C409CC421F5ACFD0029CBD0 /* EditViewController.swift in Sources */,
-				1C396E1E21F5CB77009E91F0 /* DeleteViewController.swift in Sources */,
 				1C56103D22167A38007DD4BC /* LogoutViewController.swift in Sources */,
 				1C601D5C22131BFE00454C1E /* User.swift in Sources */,
 			);
